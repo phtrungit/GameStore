@@ -1,0 +1,81 @@
+.special-countdown .product-thumb {
+    position: relative;
+    overflow: hidden;
+}
+.special-countdown .product-thumb .caption{
+    min-height: auto;
+    padding: 0 15px;
+}
+.special-countdown .description{
+    min-height: 80px;
+}
+.special-countdown .product-thumb .price {
+    text-align: left;
+}
+.special-countdown .product-thumb .price-old{
+    color: #999;
+    font-size: 16px;
+    text-decoration: line-through;
+    margin-right: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+.special-countdown .product-thumb .price-new{
+    text-align: left;
+    display: inline-block;
+    font-size: 21px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+}
+.special-countdown .product-thumb h4 {
+    font-size: 16px;
+}
+.countdown-labele{
+    position: absolute;
+    z-index: 1;
+    margin: 0 auto;
+    right: 0;   
+    opacity: 1!important;
+}
+.special-countdown .percent{
+    text-transform: uppercase;
+    color: #ff1111;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.countdown-labele .expired {
+    max-width: 70px;
+}
+.countdown-labele .hot{
+    max-width: 70px;
+}
+.expired .hot{
+    display: none;
+}
+.item-countdown{
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.item-countdown div{
+    background-color: #23a1d1;
+    padding: 2px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    margin-right: 3px; 
+    display: inline-block;
+    width: 22%;
+}
+.item-countdown div>span{
+    display: block;
+    font-size: 12px;
+    text-align: center;
+}
+.expired>div{
+    opacity: 0.6;
+}
