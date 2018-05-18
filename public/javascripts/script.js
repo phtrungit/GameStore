@@ -21,8 +21,16 @@ $(document).ready(function(){
 		function(){ $(this).animate({ top: 0 }, 'fast'); }
 	);
 
- 
-
+	/* Input Form Animation */
+	$('.input-box').focus(function(){
+		$(this).closest('.input-field').addClass('focus');
+	});
+	
+	$('.input-box').blur(function(){
+		if ($(this).val() === ''){
+			$(this).closest('.input-field').removeClass('focus');
+		}
+	});
 	 
 
 

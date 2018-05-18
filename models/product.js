@@ -13,7 +13,7 @@ var schema=new Schema({
 schema
 .virtual('url')
 .get(function () {
-  return '/'+this._id
+  return '/'+this._id;
 });
 
 schema

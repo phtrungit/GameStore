@@ -3,50 +3,50 @@
   <div class="row">
   <aside id="column-left" class="col-sm-3 hidden-xs">
   </aside>
-                <div id="content" class="col-sm-9"> <div class="slider-wrapper">
-  <div id="slideshow0" class="nivoSlider"></div>
+  <div id="content" class="col-sm-9">
+    <div class="slider-wrapper">
+      <div id="slideshow0" class="nivoSlider"></div>
 		  <div class="nivo-controlNav"></div>
-</div>
-<script type="text/javascript"><!--
-$(document).ready(function() {
-	$('#slideshow0').nivoSlider({
-	prevText: '<i class="fa fa-chevron-left"></i>',
-	nextText: '<i class="fa fa-chevron-right"></i>', 
-	});
---></script>
-<div id="product-tab-0" class="product-tab">
-  <div id="tab-featured-0" class="tab_content deactive" style="display: block;">
-    <div class="row products-category product_carousel_tab mod" style="display: block;">
-    	<h3>
-    		<span>All product</span>
-    	</h3>
-            {{# each product_list}}
-            	{{# each this}}
-            	<div class="product-grid col-lg-4 col-md-4 col-sm-4 col-xs-6">
-        <div class="product-thumb">
-                    <div class="image"><a href="{{this.url}}"><img src="{{this.imagePath}}" alt="{{this.title}}" title="{{this.title}}" class="img-responsive"></a></div>
-          <div class="caption">
-            <h4><a href="{{this.url}}">{{this.title}}</a></h4>
-                        <p class="price">
-                            {{this.price_string}} VND                          </p>
-                                    <!-- <span class="">Steam</span> -->
-                                  </div>
-          <div class="button-group">
-            <button class="btn-primary" type="button" onclick="cart.add(&#39;2374&#39;);"><span>Thêm vào giỏ</span></button>
-            <div class="add-to-links">
-              <button type="button" data-toggle="tooltip" title="" onclick="wishlist.add(&#39;2374&#39;);" data-original-title="Thêm vào yêu thích"><i class="fa fa-heart"></i></button>
-              <button type="button" data-toggle="tooltip" title="" onclick="compare.add(&#39;2374&#39;);" data-original-title="So sánh sản phẩm này"><i class="fa fa-exchange"></i></button>
+    </div>
+    <script type="text/javascript"><!--
+      $(document).ready(function() {
+	    $('#slideshow0').nivoSlider({
+        prevText: '<i class="fa fa-chevron-left"></i>',
+        nextText: '<i class="fa fa-chevron-right"></i>', 
+	    });
+--> </script>
+    <div id="product-tab-0" class="product-tab">
+      <div id="tab-featured-0" class="tab_content deactive" style="display: block;">
+        <div class="row products-category product_carousel_tab mod" style="display: block;">
+    	  <h3>
+    		  <span>All product</span>
+    	  </h3>
+          {{# each product_list}}
+          {{# each this}}
+        <div class="product-grid col-lg-4 col-md-4 col-sm-4 col-xs-6">
+          <div class="product-thumb">
+            <div class="image"><a href="/product{{this.url}}"><img src="{{this.imagePath}}" alt="{{this.title}}" title="{{this.title}}" class="img-responsive"></a></div>
+            <div class="caption">
+              <h4><a href="/product{{this.url}}">{{this.title}}</a></h4>
+              <p class="price"> {{this.price_string}} VND</p>
+              <!-- <span class="">Steam</span> -->
+            </div>
+            <div class="button-group">
+              <button class="btn-primary" type="button" onclick="cart.add(&#39;2374&#39;);"><span>Thêm vào giỏ</span></button>
+              <div class="add-to-links">
+                <button type="button" data-toggle="tooltip" title="" onclick="wishlist.add(&#39;2374&#39;);" data-original-title="Thêm vào yêu thích"><i class="fa fa-heart"></i></button>
+                <button type="button" data-toggle="tooltip" title="" onclick="compare.add(&#39;2374&#39;);" data-original-title="So sánh sản phẩm này"><i class="fa fa-exchange"></i></button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {{/each}}
+        {{/each}}
       		<span class="clearfix visible-lg-block"></span>
-            {{/each}}
+        {{/each}}
             
-          </div>
-  </div>
-</div>
+        </div>
+      </div>
+    </div>
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-end">
     <li class="page-item">
@@ -60,6 +60,6 @@ $(document).ready(function() {
     </li>
   </ul>
 </nav>
-    </div>
+  </div>
 </div>
 </div>

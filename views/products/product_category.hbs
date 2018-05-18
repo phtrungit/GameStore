@@ -25,9 +25,9 @@ $(document).ready(function() {
               {{# each this}}
             	<div class="product-grid col-lg-4 col-md-4 col-sm-4 col-xs-6">
         <div class="product-thumb">
-                    <div class="image"><a href="{{this.url}}"><img src="{{this.imagePath}}" alt="{{this.title}}" title="{{this.title}}" class="img-responsive"></a></div>
+                    <div class="image"><a href="/product{{this.url}}"><img src="{{this.imagePath}}" alt="{{this.title}}" title="{{this.title}}" class="img-responsive"></a></div>
           <div class="caption">
-            <h4><a href="{{this.url}}">{{this.title}}</a></h4>
+            <h4><a href="/product{{this.url}}">{{this.title}}</a></h4>
                         <p class="price">
                             {{this.price_string}} VND                          </p>
                                     <!-- <span class="">Steam</span> -->

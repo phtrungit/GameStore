@@ -1,0 +1,56 @@
+<div id="container">
+    <div class="container">
+        <div class="row">
+            <aside id="column-left" class="col-sm-3 hidden-xs"></aside>
+            <div class="input-form">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-sm-12"><span>Đăng ký</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 input-field">
+                            <div class="input-text">Tên tài khoản</div>
+                            <input type="text" class="input-box">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 input-field">
+                            <div class="input-text">Mật khẩu</div>
+                            <input type="password" class="input-box">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 input-field">
+                            <div class="input-text">Xác nhận mật khẩu</div>
+                            <input type="password" class="input-box">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 input-field">
+                            <div class="input-text">Họ tên</div>
+                            <input type="text" class="input-box">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 input-field">
+                            <div class="input-text">Email</div>
+                            <input type="text" class="input-box">
+                        </div>
+                    </div>
+                    <input type="submit" class="btn-submit" value="Đăng ký">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.input-box').focus(function(){
+		$(this).closest('.input-field').addClass('focus');
+	});
+	
+	$('.input-box').blur(function(){
+		if ($(this).val() === ''){
+			$(this).closest('.input-field').removeClass('focus');
+		}
+	});
+</script>

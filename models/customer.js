@@ -4,6 +4,7 @@ var schema=new Schema({
 	imagePath:{type:String, require:true},
 	name:{type:String, require:true},
 	mail:{type:String, require:true},
+	pass:{type:String, require:true},
 	phone:{type:String, require:true}
 });
 
