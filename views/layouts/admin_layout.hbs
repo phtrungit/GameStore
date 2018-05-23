@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="/node_modules_local/mdi/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="/node_modules_local/simple-line-icons/css/simple-line-icons.css" />
+  <link rel="stylesheet" href="/node_modules_local/flag-icon-css/css/flag-icon.min.css" />
+  <link rel="stylesheet" href="/node_modules_local/perfect-scrollbar/dist/css/perfect-scrollbar.min.css" />
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="/node_modules_local/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/node_modules_local/jquery-bar-rating/dist/themes/fontawesome-stars.css" />
+  <link rel="stylesheet" href="/node_modules_local/jsgrid/dist/jsgrid.min.css" />
+  <link rel="stylesheet" href="/node_modules_local/jsgrid/dist/jsgrid-theme.min.css" />
+  <link rel="stylesheet" href="/node_modules_local/datatables.net-bs4/css/dataTables.bootstrap4.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/stylesheets/style_admin.css" />
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/images/logo.png" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body class="horizontal-menu">
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center bg-dark">
+        <a class="navbar-brand brand-logo" href="../../index.html"><img src="/images/logo.png" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../images/logo-mini.svg" alt="logo" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center bg-dark">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown d-none d-lg-flex">
+            <a class="nav-link dropdown-toggle nav-btn" id="actionDropdown" href="#" data-toggle="dropdown">
+              <span class="btn">+ Create new</span>
+            </a>
+            <div class="dropdown-menu navbar-dropdown dropdown-left" aria-labelledby="actionDropdown">
+              <a class="dropdown-item" href="#">
+                <i class="icon-user text-primary"></i>
+                User Account
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">
+                <i class="icon-user-following text-warning"></i>
+                Admin User
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">
+                <i class="icon-docs text-success"></i>
+                Sales report
+              </a>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-bell mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <a class="dropdown-item">
+                <p class="mb-0 font-weight-normal float-left">You have 4 new notifications
+                </p>
+                <span class="badge badge-pill badge-warning float-right">View all</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="icon-info mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-medium">Application Error</h6>
+                  <p class="font-weight-light small-text">
+                    Just now
+                  </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-warning">
+                    <i class="icon-speech mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-medium">Settings</h6>
+                  <p class="font-weight-light small-text">
+                    Private message
+                  </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-info">
+                    <i class="icon-envelope mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-medium">New user registration</h6>
+                  <p class="font-weight-light small-text">
+                    2 days ago
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+              <i class="icon-envelope mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+              <div class="dropdown-item">
+                <p class="mb-0 font-weight-normal float-left">You have 7 unread mails
+                </p>
+                <span class="badge badge-info badge-pill float-right">View all</span>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <img src="../../images/faces/face4.jpg" alt="image" class="profile-pic" />
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-medium">David Grey
+                    <span class="float-right font-weight-light small-text">1 Minutes ago</span>
+                  </h6>
+                  <p class="font-weight-light small-text">
+                    The meeting is cancelled
+                  </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <img src="../../images/faces/face2.jpg" alt="image" class="profile-pic" />
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-medium">Tim Cook
+                    <span class="float-right font-weight-light small-text">15 Minutes ago</span>
+                  </h6>
+                  <p class="font-weight-light small-text">
+                    New product launch
+                  </p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <img src="../../images/faces/face3.jpg" alt="image" class="profile-pic" />
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-medium"> Johnson
+                    <span class="float-right font-weight-light small-text">18 Minutes ago</span>
+                  </h6>
+                  <p class="font-weight-light small-text">
+                    Upcoming board meeting
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li>
+          
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <!-- partial:../../partials/_settings-panel.html -->
+        
+        <!-- partial -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/product">
+                <i class="fab fa-product-hunt menu-icon"></i>
+                <span class="menu-title">Products</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#menu2" aria-expanded="true" aria-controls="menu2">
+                <i class="fas fa-users menu-icon"></i>
+                <span class="menu-title">Customers</span>
+              </a>
+              <div class="collapse" id="menu2">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link One</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Two</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Three</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Four</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#menu3" aria-expanded="false" aria-controls="menu3">
+                <i class="fas fa-chart-line menu-icon"></i>
+                <span class="menu-title">Statistics</span>
+              </a>
+              <div class="collapse" id="menu3">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link One</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Two</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Three</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Four</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#menu4" aria-expanded="false" aria-controls="menu4">
+                <i class="fas fa-money-bill-wave-alt menu-icon"></i>
+                <span class="menu-title">Order</span>
+              </a>
+              <div class="collapse" id="menu4">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link One</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Two</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Three</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">Sample Link Four</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        {{{body}}}
+         <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="container-fluid clearfix">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2017 <a href="#">UrbanUI</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- row-offcanvas ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="/node_modules_local/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules_local/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/node_modules_local/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/node_modules_local/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="/node_modules_local/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+  <script src="/node_modules_local/chart.js/dist/Chart.min.js"></script>
+  <script src="/node_modules_local/raphael/raphael.min.js"></script>
+  <script src="/node_modules_local/morris.js/morris.min.js"></script>
+  <script src="/node_modules_local/jquery-sparkline/jquery.sparkline.min.js"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="/javascripts/off-canvas.js"></script>
+  <script src="/javascripts/hoverable-collapse.js"></script>
+  <script src="/javascripts/misc.js"></script>
+  <script src="/javascripts/settings.js"></script>
+  <script src="/javascripts/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/javascripts/dashboard.js"></script>
+   <script src="/javascripts/js-grid.js"></script>
+  <script src="/javascripts/db.js"></script>
+  <script src="/javascripts/data-table.js"></script>
+
+  <script src="/node_modules_local/datatables.net/js/jquery.dataTables.js"></script>
+  <script src="/node_modules_local/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+  <!-- End custom js for this page-->
+  <script src="/node_modules_local/jsgrid/dist/jsgrid.min.js"></script>
+</body>
+
+</html>

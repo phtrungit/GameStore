@@ -1,0 +1,48 @@
+<div class="content-wrapper">
+<div class="row">
+	<div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add new product</h4>
+                  <form class="forms-sample" method="post" action="/admin/product/add" />
+                    <div class="form-group">
+                      <label for="exampleInputName1">Name</label>
+                      <input type="text" class="form-control" id="exampleInputName1" name="product_title" value="{{name}}" placeholder="ex:OutLast" />
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Category</label>
+                      <select class="form-control" name="product_category">
+                      	<option>Action</option>
+                      	<option>Adventure</option>
+                      	<option>Indie</option>
+                      	<option>RPG</option>
+                      	<option>Racing</option>
+                      	<option>Sports</option>
+                      	<option>Simulation</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Price</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" name="product_price" placeholder="ex:100,0000" value="{{price}}" />
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Amount</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" name="product_amount" placeholder="ex:100" value="{{amount}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Image path</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" name="product_image" placeholder="ex:steam.com/image.png" value="{{image}}" />
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleTextarea1">Description</label>
+                      <textarea class="form-control" id="exampleTextarea1" name="product_descr" rows="2" value="{{descr}}" ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                    <a href="/admin/product" class="btn btn-light">Cancel</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+</div>
+</div>

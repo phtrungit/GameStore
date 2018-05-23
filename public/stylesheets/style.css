@@ -477,7 +477,7 @@ border-top-color: #D9D9D9;
 }
 /*CATEGORY TABLE */
 /* INPUT FORM */
-.input-form span{
+.input-form .form-title{
     padding: 0;
     margin: 0;
     font-size: 28px;
@@ -486,6 +486,10 @@ border-top-color: #D9D9D9;
 .input-form .row:first-child{
     margin-bottom: 30px;
 }
+.input-form .row:last-child{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .input-field {
     position: relative;
     box-sizing: border-box;
@@ -493,7 +497,7 @@ border-top-color: #D9D9D9;
 }
 .input-field .input-box{
     position: relative;
-    width: 300px;
+    width: 350px;
     height: 50px;
     background: transparent;
     border: none;
@@ -509,14 +513,15 @@ border-top-color: #D9D9D9;
     opacity: .5;
 }
 .input-form .btn-submit{
-    width: 100%;
+    margin-left: 20px;
+    width: 150px;
     background: #01adc4;
     color: #fff;
     border-radius: 8px;
     border: none;
     outline: none;
     height: 40px;
-    font-size: 24px;
+    font-size: 20px;
     font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
 }
 .focus .input-text{
@@ -525,4 +530,42 @@ border-top-color: #D9D9D9;
     font-size: 20px;
     opacity: 1;
     color: #fff;
+}
+.input-form .sub-text{
+    font-size: 16px;
+}
+.input-form a{
+    margin: auto;
+    font-size: 18px;
+    color: #D9EB65;
+}
+.input-form a:hover{
+    color: #27CF2D;  
+}
+
+/* EDIT INFO */
+.input-form .info-text{
+    line-height: 30px;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.input-form .info-box{
+    width: 350px;
+    height: 30px;
+    color: #000;
+    border: #CF1717;
+    outline: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+#link-change-info{
+    position: absolute;
+    margin-top: -20px;
+    font-size: 18px;
+    color: #D9EB65;
+    text-decoration: underline;
+}
+#link-change-info:hover{
+    color: #27CF2D;
 }

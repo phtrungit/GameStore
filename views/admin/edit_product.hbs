@@ -1,0 +1,77 @@
+<div class="content-wrapper">
+<div class="row">
+	<div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Edit product</h4>
+                  {{#product}}
+                  <script>
+                  $(document).ready(function(){
+                        $("#{{this.category}}").attr({'selected':''});
+                  });
+                  </script>
+                  <form class="forms-sample" method="post" action="/admin/product/edit{{this.url}}" />
+                    <div class="form-group">
+                        
+                      <label for="exampleInputName1">Name</label>
+                      <input type="text" class="form-control" id="exampleInputName1" name="product_title" value="{{this.title}}" placeholder="ex:OutLast" />
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Category</label>
+                      <select class="form-control" name="product_category">
+                      	<option  value="Action">Action</option>
+                      	<option  id="Adventure" value="Adventure">Adventure</option>
+                      	<option  id="Indie" value="Indie">Indie</option>
+                      	<option value="RPG">RPG</option>
+                      	<option value="Racing">Racing</option>
+                      	<option value="Sports">Sports</option>
+                      	<option value="Simulation">Simulation</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                    
+                      <label for="exampleInputCity1">Price</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" name="product_price" placeholder="ex:100,0000" value="{{this.price}}" />
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Amount</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" name="product_amount" placeholder="ex:100" value="{{this.amount}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Image path</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" name="product_image" placeholder="ex:steam.com/image.png" value="{{this.imagePath}}" />
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleTextarea1">Description</label>
+                      <textarea class="form-control" id="exampleTextarea1" name="product_descr" rows="2" value="" >{{this.description}}</textarea>
+                    </div>
+                    {{/product}}
+                    <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Membership</label>
+                          <div class="col-sm-4">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="product_status" id="available" value="available" {{available_flag}} />
+                                Available
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="product_status" id="Unavailble" value="unavailable" {{unavailable_flag}} />
+                                Unavailable
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                    
+                    <button type="submit" class="btn btn-success mr-2">Save</button>
+                    <button id="cancle" href="#" class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+</div>
+</div>
