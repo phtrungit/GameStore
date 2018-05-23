@@ -1,9 +1,11 @@
-
 $(document).ready(function(){
 
 
 	/* ---- Countdown timer ---- */
-
+/*
+	$('#counter').countdown({
+		timestamp : (new Date()).getTime() + 11*24*60*60*1000
+	});
 	/* ---- Animations ---- */
 
 	$('#links a').hover(
@@ -27,7 +29,7 @@ $(document).ready(function(){
 		}
 	});
 	 
-$('#link-change-info').click(function(){
+	$('#link-change-info').click(function(){
 		$(this).closest('.input-form').find('.info-box').removeAttr('disabled');
 		$(this).closest('.input-form').find('.btn-submit').css({'display':'block'});
 		$(this).css({'display':'none'});
