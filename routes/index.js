@@ -13,5 +13,6 @@ router.get('/category/:category_name',product_controller.product_category);
 // GET user activity
 router.get('/login', user_controller.login_form);
 router.get('/register', user_controller.register_form);
+router.get('/user', user_controller.user_info);
 
 module.exports = router;
