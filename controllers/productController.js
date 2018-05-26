@@ -12,7 +12,11 @@ exports.product_list = function (req, res, next) {
             for (var i = 0; i <list_products.length; i+=chunkSize) {
             	productChunk.push(list_products.slice(i,i+chunkSize));
             }
-            res.render('index', { product_list: productChunk});
+            if (req.isAuthenticated()) {
+                    res.render('index', { product_list: productChunk,layout:'user_layout',username:req.user.username});
+                }
+            else
+            res.render('index', { product_list: productChunk,layout:'layout'});
         })
 
 };
@@ -23,7 +27,7 @@ exports.product_detail = function (req, res, next) {
         .exec(function (err, detail_products) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('./products/product_detail', { product_detail: detail_products });
+                res.render('./products/product_detail', { product_detail: detail_products });
         })
 
 };

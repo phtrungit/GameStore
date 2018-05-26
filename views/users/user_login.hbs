@@ -3,24 +3,34 @@
         <div class="row">
             <aside id="column-left" class="col-sm-3 hidden-xs"></aside>
             <div class="input-form">
-                <form method="POST">
+                <form method="POST" action="/login">
                     <div class="row">
                         <div class="col-sm-12"><span class="form-title">Đăng nhập</span></div>
+                        <div class="error">
+                           {{#if hasErrors}}
+                            
+                                {{# each messages }}
+                                    <p>{{this}}!</p>
+                                {{/each}}
+                            
+                        {{/if}}
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 input-field">
                             <div class="input-text">Tên đăng nhập</div>
-                            <input type="text" class="input-box">
+                            <input type="text" class="input-box" name="username">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 input-field">
                             <div class="input-text">Mật khẩu</div>
-                            <input type="password" class="input-box">
+                            <input type="password" class="input-box" name="password">
                         </div>
                     </div>
                     <div class="row">
-                        <input type="submit" class="btn-submit" value="Đăng nhập">
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                        <button type="submit" class="btn-submit">Đăng nhập</button>
                         <a href="/recover"><span>Quên mật khẩu</span></a>
                     </div>
                     <div class="row" >

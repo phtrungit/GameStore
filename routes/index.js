@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var csrf = require('csurf');
+var csrfProtection = csrf();
+router.use(csrfProtection);
+
 var product_controller = require('../controllers/productController');
 var user_controller = require('../controllers/userController');
 var admin_controller=require('../controllers/adminController');
@@ -13,8 +17,11 @@ router.get('/category/:category_name',product_controller.product_category);
 
 // GET user activity
 router.get('/login', user_controller.login_form);
+router.post('/login', user_controller.login_form_post);
 router.get('/register', user_controller.register_form);
-router.get('/user', user_controller.user_info);
+router.post('/register', user_controller.register_form_post);
+router.get('/logout', user_controller.user_logout);
+router.get('/detail',user_controller.isLoggedIn, user_controller.user_info);
 //GET Admin activity
 router.get('/admin', admin_controller.dashboard);
 router.get('/admin/product', admin_controller.product_admin);

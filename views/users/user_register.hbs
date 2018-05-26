@@ -3,42 +3,55 @@
         <div class="row">
             <aside id="column-left" class="col-sm-3 hidden-xs"></aside>
             <div class="input-form">
-                <form method="POST">
+                <form action="/register" method="POST">
                     <div class="row">
                         <div class="col-sm-12"><span class="form-title">Đăng ký</span></div>
+                        <div class="error">
+                           {{#if hasErrors}}
+                            
+                                {{# each messages }}
+                                    <p>{{this}}!</p>
+                                {{/each}}
+                            
+                        {{/if}}
+                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-sm-12 input-field">
                             <div class="input-text">Tên tài khoản</div>
-                            <input type="text" class="input-box">
+                            <input type="text" class="input-box" name="username">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 input-field">
                             <div class="input-text">Mật khẩu</div>
-                            <input type="password" class="input-box">
+                            <input type="password" class="input-box" name="password">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 input-field">
                             <div class="input-text">Xác nhận mật khẩu</div>
-                            <input type="password" class="input-box">
+                            <input type="password" class="input-box" name="repeat_password">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 input-field">
                             <div class="input-text">Họ tên</div>
-                            <input type="text" class="input-box">
+                            <input type="text" class="input-box" name="name">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 input-field">
                             <div class="input-text">Email</div>
-                            <input type="text" class="input-box">
+                            <input type="text" class="input-box" name="email">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6"><input type="submit" class="btn-submit" value="Đăng ký"></div>
+                        <div class="col-sm-6">
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                            <button type="submit" class="btn-submit">Đăng ký</button>
+                        </div>
                     </div>
                     <div class="row">
                         <span class="col-sm-6"><a href="/login" style="margin-left:20px">Đã có tài khoản</a></span>

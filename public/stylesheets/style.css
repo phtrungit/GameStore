@@ -569,3 +569,10 @@ border-top-color: #D9D9D9;
 #link-change-info:hover{
     color: #27CF2D;
 }
+.error
+{
+  margin-top: 15px;
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+}
