@@ -1,6 +1,8 @@
 var Product=require('../models/product');
+var passport=require('passport');
+var flash=require('connect-flash');
 exports.dashboard = function (req, res, next){
-    res.render('./admin/dashboard',{layout:"admin_layout"});
+    res.render('./admin/dashboard',{layout:"admin_layout",username:req.user.username});
 };
 
 exports.product_admin = function (req, res, next) {
@@ -76,3 +78,23 @@ Product.findByIdAndRemove(req.params.id, function (err) {
                    res.redirect('/admin/product');
                 });
 };
+
+exports.login = function (req, res, next) {
+    var messages=req.flash('error');
+    res.render('./admin/admin_login',{layout:false,csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
+};
+exports.login_form_post = passport.authenticate('local.signin_admin', {
+    successRedirect: '/admin',
+    failureRedirect: '/admin/login',
+    failureFlash: true
+})
+exports.logout = function (req, res, next){
+    req.logout();
+    res.redirect('/admin/login');
+};
+exports.isLoggedIn=function (req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/admin/login');
+}
