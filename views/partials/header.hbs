@@ -1,69 +1,76 @@
 <div id="header">
-  <header class="header-row">
-    <div class="container">
-      <div class="table-container">
-        <nav class="htop col-md-9 pull-right flip inner" id="top">
-          <div id="top-links" class="nav pull-right flip">
-            <ul>
-              <li><a href="/login">Đăng nhập</a></li>
-              <li><a href="/register">Đăng ký</a></li>
-            </ul>
-          </div>
-          <div class="pull-right flip left-top">
-            <div class="links">
-              <ul>
-                                              
-                  </ul>
+    <header class="header-row">
+        <div class="container">
+            <div class="table-container">
+                <nav class="htop col-md-9 pull-right flip inner" id="top">
+                    <div id="top-links" class="nav pull-right flip">
+                        <ul>
+                            <li><a href="/user/login">Đăng nhập</a></li>
+                            <li><a href="/user/register">Đăng ký</a></li>
+                        </ul>
+                    </div>
+                    <div class="pull-right flip left-top">
+                        <div class="links">
+                            <ul>
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="col-table-cel col-md-3 col-sm-4 col-xs-12 inner">
+                    <div id="logo" style="padding-top:10px;"><a href="/"><img class="img-responsive" title="Game Store"
+                                                                              alt="Game Store"
+                                                                              src="/images/logo.png"></a></div>
+                </div>
+                <div class="col-md-4 col-md-push-5 col-sm-8 col-xs-12 inner">
+
+                </div>
+                <div class="clearfix visible-sm-block visible-xs-block"></div>
+
+                <div class="col-md-9 pull-right flip col-sm-4 col-xs-12 inner">
+                    <div id="cart">
+                        <button type="button" data-toggle="dropdown" data-loading-text="Đang tải..."
+                                class="heading dropdown-toggle">
+                            <div class="pull-left flip">
+                                <h4></h4>
+                            </div>
+                            <span id="cart-total">{{totalQty}} sản phẩm - {{totalPrice}}
+                                VNĐ</span></button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <p class="text-center">Không có sản phẩm trong giỏ hàng!</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-              </div>
-        </nav>
-        <div class="col-table-cel col-md-3 col-sm-4 col-xs-12 inner">
-                    <div id="logo" style="padding-top:10px;"><a href="/"><img class="img-responsive" title="Game Store" alt="Game Store" src="/images/logo.png"></a></div>
-                  </div>
-        <div class="col-md-4 col-md-push-5 col-sm-8 col-xs-12 inner">
-          
         </div>
-        <div class="clearfix visible-sm-block visible-xs-block"></div>
-        
-        <div class="col-md-9 pull-right flip col-sm-4 col-xs-12 inner"> <div id="cart">
-  <button type="button" data-toggle="dropdown" data-loading-text="Đang tải..." class="heading dropdown-toggle">
-  <div class="pull-left flip">
-    <h4></h4>
-  </div>
-  <span id="cart-total">0 sản phẩm - 0 VNĐ</span> </button>
-  <ul class="dropdown-menu">
-        <li>
-      <p class="text-center">Không có sản phẩm trong giỏ hàng!</p>
-    </li>
-      </ul>
-</div>
- </div>
-      </div>
-    </div>
-  </header>
+    </header>
 </div>
 <section class="wrapper-box">
-<div class="container" style="padding-top:20px;">
-<nav id="menu" class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div class="container" style="padding-top:20px;">
+        <nav id="menu" class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Trang chủ</a>
-      </li>
-     <li class="nav-item">
-        <a class="nav-link" href="#">Liên hệ</a>
-      </li>
-    </ul>
-    <form class="form-inline">
-      <div class="form-group">
-      <input class="form-control mr-sm-4 col-xs-4" type="search" placeholder="Search" aria-label="Search">
-      </div>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-</div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Liên hệ</a>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control mr-sm-4 col-xs-4" type="search" placeholder="Search"
+                               aria-label="Search">
+                    </div>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>

@@ -1,72 +1,114 @@
 <div id="container">
-<div class="container">
-  <div class="row">
-  <aside id="column-left" class="col-sm-3 hidden-xs">
-  </aside>
-  {{#product_detail}}
-       <div id="content" class="col-sm-9">      <div itemscope="" itemtype="http://schema.org/Product">
-        <h1 itemprop="name">{{this.title}}</h1>
-        <div class="row product-info">
-                                                                      <div class="col-sm-6">
-            <div class="thumbnails">
-                            <div class="image"><a href="{{this.imagePath}}" title="{{this.title}}"><img class="img-responsive" itemprop="image" src="{{this.imagePath}}" title="{{this.title}}" alt="{{this.title}}"></a></div>
-                                        </div>
-          </div>
-                                                            <div class="col-sm-6">
-            <ul class="list-unstyled description">
-                            
-                                      <li><b>Tình trạng:</b> <span style="color:#53af2e; font-weight:bold;">{{this.status}}</span></li>
-                                </ul>
-                        
-            <ul class="price-box">
-                        <li class="price" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer"><span class="real" itemprop="price">{{this.price_string}} VNĐ<span itemprop="availability" content="Còn hàng"></span></span></li>
-            <li></li>
-		</ul>
-                                     
+    <div class="container">
+        <div class="row">
+            <aside id="column-left" class="col-sm-3 hidden-xs">
+            </aside>
+            {{#product_detail}}
+                <div id="content" class="col-sm-9">
+                    <div itemscope="" itemtype="http://schema.org/Product">
+                        <h1 itemprop="name">{{this.title}}</h1>
+                        <div class="row product-info">
+                            <div class="col-sm-6">
+                                <div class="thumbnails">
+                                    <div class="image"><a href="{{this.imagePath}}" title="{{this.title}}"><img
+                                            class="img-responsive" itemprop="image" src="{{this.imagePath}}"
+                                            title="{{this.title}}" alt="{{this.title}}"></a></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled description">
 
-                        <div id="product">
-                                                        <div class="cart">
-                <div>
-                  <div class="qty">
-                    <label class="control-label" for="input-quantity">Số lượng</label>
-                  
-                    <input type="text" name="quantity" value="1" size="2" id="input-quantity" class="form-control">
-                    <input type="hidden" name="product_id" value="1057">
-                    <div class="clear"></div>
-                  </div>
-                  <button type="button" id="button-cart" data-loading-text="Đang tải..." class="btn btn-primary btn-lg">Thêm vào giỏ</button>
+                                    <li>
+                                        <b>Tình trạng:</b>
+                                        <span
+                                            style="color:#53af2e; font-weight:bold;">{{this.status}}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <b>Nhà phát hành:</b>
+                                        <span
+                                                style="color:#53af2e; font-weight:bold;">{{this.publisher}}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <b>Ngày phát hành:</b>
+                                        <span
+                                                style="color:#53af2e; font-weight:bold;">{{this.releaseDate}}
+                                        </span>
+                                    </li>
+                                </ul>
+
+                                <ul class="price-box">
+                                    <li class="price" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                        <span class="real" itemprop="price">{{this.price_string}} VNĐ<span
+                                                itemprop="availability" content="Còn hàng"></span></span></li>
+                                    <li></li>
+                                </ul>
+
+
+                                <div id="product">
+                                    <div class="cart">
+                                        <div>
+                                            <form class="addCartFrmQty">
+                                            <div class="qty">
+                                                <label class="control-label" for="input-quantity">Số lượng</label>
+
+                                                <input type="text" name="quantity" value="1" size="2"
+                                                       id="input-quantity" class="form-control">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                                <input type="hidden" name="productIDToAdd" value="{{this._id}}">
+                                                <button type="submit" id="button-cart" onclick="addCart({{this.price}},document.getElementById('input-quantity').value)" class="btn btn-primary btn-lg">Thêm vào giỏ
+                                                </button>
+                                            </form>
+
+                                        </div>
+
+                                        <div class="clear"></div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <ul class="nav nav-tabs">
+                            <li>
+                                <a class="nav-link active" href="#description" role="tab"
+                                   data-toggle="tab">Description</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="#platform" role="tab" data-toggle="tab">Platform</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="description">{{{this.description_html}}}
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="platform">
+                                <ul>
+                                    <strong>Minimum:</strong>
+                                    <br>
+                                    <ul class="bb_ul">
+                                        <li><strong>OS:</strong> Windows® 7/Vista/XP
+                                            <br></li>
+                                        <li><strong>Processor:</strong> Intel® Core™ 2 Duo E6600 or AMD Phenom™ X3 8750
+                                            processor or better
+                                            <br></li>
+                                        <li><strong>Memory:</strong> 2 GB RAM
+                                            <br></li>
+                                        <li><strong>Graphics:</strong> Video card must be 256 MB or more and should be a
+                                            DirectX 9-compatible with support for Pixel Shader 3.0
+                                            <br></li>
+                                        <li><strong>DirectX:</strong> Version 9.0c
+                                            <br></li>
+                                        <li><strong>Storage:</strong> 15 GB available space
+                                        </li>
+                                    </ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                                  
-                  <div class="clear"></div>
-                                
-              </div>
-            </div>
-           
-                      </div>
+            {{/product_detail}}
         </div>
-        <ul class="nav nav-tabs">
-                <li>
-                    <a class="nav-link active" href="#description" role="tab" data-toggle="tab">Description</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#platform" role="tab" data-toggle="tab">Platform</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="description">{{{this.description_html}}}
-                </div>
-                <div role="tabpanel" class="tab-pane" id="platform"><ul>
-								<strong>Minimum:</strong>
-<br><ul class="bb_ul"><li><strong>OS:</strong> Windows® 7/Vista/XP
-<br></li><li><strong>Processor:</strong> Intel® Core™ 2 Duo E6600 or AMD Phenom™ X3 8750 processor or better
-<br></li><li><strong>Memory:</strong> 2 GB RAM
-<br></li><li><strong>Graphics:</strong> Video card must be 256 MB or more and should be a DirectX 9-compatible with support for Pixel Shader 3.0
-<br></li><li><strong>DirectX:</strong> Version 9.0c
-<br></li><li><strong>Storage:</strong> 15 GB available space
-</li></ul>							</ul></div>
-            </div>
-        </div>
-</div>
-{{/product_detail}}
-</div>
-</div>
+    </div>

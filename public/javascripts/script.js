@@ -1,14 +1,35 @@
 $(document).ready(function(){
 
+    $(".addCartFrm").submit(function(event) {
+        /* stop form from submitting normally */
+        event.preventDefault();
 
-	/* ---- Countdown timer ---- */
-/*
-	$('#counter').countdown({
-		timestamp : (new Date()).getTime() + 11*24*60*60*1000
-	});
+
+        var temp=$(this).find('input[type="hidden"]').val();
+        //console.log(temp);
+
+        $.ajax({
+            type: "post",
+            url: '/add-to-cart/'+temp
+        });
+    });
+    $(".addCartFrmQty").submit(function(event) {
+        /* stop form from submitting normally */
+        event.preventDefault();
+
+
+        var productID=$(this).find('input[name="productIDToAdd"]').val();
+        var qty=$(this).find('input[id="input-quantity"]').val();
+        //console.log(temp);
+
+        $.ajax({
+            type: "post",
+            url: '/add-to-cart/'+productID+'/'+qty
+        });
+    });
 	/* ---- Animations ---- */
 
-	$('#links a').hover(
+    $('#links a').hover(
 		function(){ $(this).animate({ left: 3 }, 'fast'); },
 		function(){ $(this).animate({ left: 0 }, 'fast'); }
 	);

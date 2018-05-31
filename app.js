@@ -5,12 +5,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
+var userRouter = require('./routes/user');
+var adminRouter = require('./routes/admin');
 var expressHbs=require('express-handlebars');
 var mongoose=require('mongoose');
 var session=require('express-session');
 var passport=require('passport');
 var flash=require('connect-flash');
 var validator = require('express-validator');
+var MongoStore=require('connect-mongo')(session);
+
 var app = express();
 var mongoDB = 'mongodb://admin:phtrungit@ds119080.mlab.com:19080/dhtstoredb';
 mongoose.connect(mongoDB);
@@ -31,13 +35,26 @@ app.use(validator());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret:'normalsecretkey',resave:false, saveUninitialized:false}));
+app.use(session({
+	secret:'normalsecretkey',
+	resave:false,
+	saveUninitialized:false,
+	store: new MongoStore({ mongooseConnection: mongoose.connection }),
+	cookie: {maxAge: 12*60*60*1000}
+}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+  res.locals.session=req.session;
+  next();
+});
+
 app.use('/', indexRouter);
+app.use('/user', userRouter);
+app.use('/admin', adminRouter);
 
 
 // catch 404 and forward to error handler

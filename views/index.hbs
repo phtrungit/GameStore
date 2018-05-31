@@ -40,13 +40,13 @@
       <div id="slideshow0" class="nivoSlider"></div>
 		  <div class="nivo-controlNav"></div>
     </div>
-    <script type="text/javascript"><!--
+    <!--<script type="text/javascript">&lt;!&ndash;
       $(document).ready(function() {
 	    $('#slideshow0').nivoSlider({
         prevText: '<i class="fa fa-chevron-left"></i>',
         nextText: '<i class="fa fa-chevron-right"></i>', 
 	    });
---> </script>
+&ndash;&gt; </script>-->
     <div id="product-tab-0" class="product-tab">
       <div id="tab-featured-0" class="tab_content deactive" style="display: block;">
         <div class="row products-category product_carousel_tab mod" style="display: block;">
@@ -64,10 +64,16 @@
               <!-- <span class="">Steam</span> -->
             </div>
             <div class="button-group">
-              <button class="btn-primary" type="button" onclick="cart.add(&#39;2374&#39;);"><span>Thêm vào giỏ</span></button>
+                <form class="addCartFrmQty">
+                    <input type="hidden" name="quantity" value="1" size="2"
+                           id="input-quantity" class="form-control">
+                    <input type="hidden" name="productIDToAdd" value="{{this._id}}">
+                    <button class="btn btn-primary" onclick="addCart({{this.price}},1)"  type="submit"><span>Thêm vào giỏ</span></button>
+                </form>
+             <!-- <a class="btn btn-primary"  href="/add-to-cart{{this.url}}"><span>Thêm vào giỏ</span></a>-->
               <div class="add-to-links">
-                <button type="button" data-toggle="tooltip" title="" onclick="wishlist.add(&#39;2374&#39;);" data-original-title="Thêm vào yêu thích"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" title="" onclick="compare.add(&#39;2374&#39;);" data-original-title="So sánh sản phẩm này"><i class="fa fa-exchange"></i></button>
+                <button type="button" data-toggle="tooltip" title=""  data-original-title="Thêm vào yêu thích"><i class="fa fa-heart"></i></button>
+                <button type="button" data-toggle="tooltip" title=""  data-original-title="So sánh sản phẩm này"><i class="fa fa-exchange"></i></button>
               </div>
             </div>
           </div>

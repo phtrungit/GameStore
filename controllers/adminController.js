@@ -19,7 +19,7 @@ exports.product_admin = function (req, res, next) {
 };
 exports.add_product = function (req, res, next) {
 
-	res.render('./admin/add_product',{layout:"admin_layout"})
+	res.render('./admin/add_product',{layout:"admin_layout",csrfToken:req.csrfToken()})
 };
 
 exports.add_product_post = function (req, res, next) {
@@ -30,7 +30,9 @@ exports.add_product_post = function (req, res, next) {
 		price:req.body.product_price,
 		category:req.body.product_category,
 		amount:req.body.product_amount,
-		status:'available'
+		status:'available',
+        publisher:req.body.product_publisher,
+        releaseDate:req.body.product_releaseDate
 	});
 	product.save(function (err) {
                 if (err) { return next(err); }
@@ -45,9 +47,9 @@ Product.findById(req.params.id)
         .exec(function (err, detail_products) {
             if (err) { return next(err); }
             if(detail_products.status="available")
-                res.render('./admin/edit_product',{layout:"admin_layout",product:detail_products,available_flag:'checked'});
+                res.render('./admin/edit_product',{layout:"admin_layout",csrfToken:req.csrfToken(),product:detail_products,available_flag:'checked'});
             else
-                res.render('./admin/edit_product',{layout:"admin_layout",product:detail_products,unavailable_flag:'checked'});
+                res.render('./admin/edit_product',{layout:"admin_layout",csrfToken:req.csrfToken(),product:detail_products,unavailable_flag:'checked'});
         })
    
 
@@ -62,7 +64,9 @@ var product=new Product({
         category:req.body.product_category,
         amount:req.body.product_amount,
         status:req.body.product_status,
-        _id:req.params.id
+        _id:req.params.id,
+        publisher:req.body.product_publisher,
+        releaseDate:req.body.product_releaseDate
     }); 
     Product.findByIdAndUpdate(req.params.id, product, {}, function (err,theproduct) {
                 if (err) { return next(err); }
@@ -93,7 +97,7 @@ exports.logout = function (req, res, next){
     res.redirect('/admin/login');
 };
 exports.isLoggedIn=function (req, res, next) {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated() && req.user.isAdmin) {
         return next();
     }
     res.redirect('/admin/login');

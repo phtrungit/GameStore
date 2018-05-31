@@ -7,7 +7,7 @@ exports.login_form = function (req, res, next){
 };
 exports.login_form_post = passport.authenticate('local.signin', {
     successRedirect: '/',
-    failureRedirect: '/login',
+    failureRedirect: '/user/login',
     failureFlash: true
 })
 
@@ -18,7 +18,7 @@ exports.register_form = function (req, res, next){
 };
 exports.register_form_post = passport.authenticate('local.signup', {
     successRedirect: '/',
-    failureRedirect: '/register',
+    failureRedirect: '/user/register',
     failureFlash: true
 })
 exports.user_info = function (req, res, next){
@@ -26,7 +26,7 @@ exports.user_info = function (req, res, next){
 };
 exports.user_logout = function (req, res, next){
     req.logout();
-    res.redirect('/');
+    res.redirect('/user/login');
 };
 exports.isLoggedIn=function (req, res, next) {
     if (req.isAuthenticated()) {
