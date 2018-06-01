@@ -39,6 +39,7 @@
         var totalQty={{totalQty}};
         function addCart(price,qty)
         {
+            var qty=parseInt(qty);
             totalQty=totalQty+qty;
             totalPrice=totalPrice+(price*qty);
             $(".addCartFrmQty").submit(function(event) {

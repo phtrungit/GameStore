@@ -1,6 +1,6 @@
-var Product=require('../models/product');
-var Category=require('../models/category');
-var Cart =require('../models/cart')
+var Product= require('../models/product');
+var Category= require('../models/category');
+var Cart = require('../models/cart');
 exports.product_list = function (req, res, next) {
 
     Product.find()
@@ -49,6 +49,9 @@ exports.product_detail = function (req, res, next) {
                 totalQty=0;
                 totalPrice=0;
             }
+            if(req.isAuthenticated())
+                res.render('./products/product_detail', { layout:'user_layout',username:req.user.username,product_detail: detail_products,totalQty:totalQty,totalPrice:totalPrice });
+            else
                 res.render('./products/product_detail', { product_detail: detail_products,totalQty:totalQty,totalPrice:totalPrice });
         })
 
@@ -64,7 +67,20 @@ exports.product_category = function (req, res, next) {
             for (var i = 0; i <category_products.length; i+=chunkSize) {
             	productChunk.push(category_products.slice(i,i+chunkSize));
             }
-            res.render('./products/product_category', { product_category: productChunk,category_name:req.params.category_name });
+            if(req.session.cart)
+            {
+                totalQty=req.session.cart.totalQty;
+                totalPrice=req.session.cart.totalPrice;
+            }
+            else
+            {
+                totalQty=0;
+                totalPrice=0;
+            }
+            if(req.isAuthenticated())
+                res.render('./products/product_category', { layout:'user_layout',username:req.user.username,product_category: productChunk,category_name:req.params.category_name,totalQty:totalQty,totalPrice:totalPrice });
+            else
+                res.render('./products/product_category', { product_category: productChunk,category_name:req.params.category_name,totalQty:totalQty,totalPrice:totalPrice });
         })
 
 };
