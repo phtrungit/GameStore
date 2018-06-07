@@ -23,6 +23,7 @@ passport.use('local.signup', new LocalStrategy({
     req.checkBody('repeat_password', 'Invalid repeat_password').notEmpty().isLength({min:4});
     req.checkBody('name', 'Invalid name').notEmpty();
     req.checkBody('email', 'Invalid email').notEmpty().isEmail();
+    req.checkBody('phone', 'Invalid phone').notEmpty();
     var errors = req.validationErrors();
     if (errors) {
         var messages = [];
@@ -43,6 +44,9 @@ passport.use('local.signup', new LocalStrategy({
         newUser.password = newUser.encryptPassword(password);
         newUser.name=req.body.name;
         newUser.mail=req.body.email;
+        newUser.phone=req.body.phone;
+        newUser.imagePath='';
+        newUser.isAdmin=false;
         newUser.save(function(err, result) {
            if (err) {
                return done(err);

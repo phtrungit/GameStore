@@ -129,6 +129,7 @@ exports.shopping_cart =function (req,res,next) {
     else
         res.render('./shop/cart', {products: cart.generateArray(), totalPrice: cart.totalPrice,totalQty:cart.totalQty});
 };
+
 /*
 exports.product_list = function (req, res, next) {
 

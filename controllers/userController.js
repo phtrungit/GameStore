@@ -34,7 +34,7 @@ exports.user_info = function (req, res, next){
         totalQty=0;
         totalPrice=0;
     }
-    res.render('./users/user_info',{layout:'user_layout',name:req.user.name,username:req.user.username,email:req.user.mail,totalPrice:totalPrice,totalQty:totalQty});
+    res.render('./users/user_info',{layout:'user_layout',name:req.user.name,username:req.user.username,email:req.user.mail,phone:req.user.phone,totalPrice:totalPrice,totalQty:totalQty});
 };
 exports.user_logout = function (req, res, next){
     req.logout();

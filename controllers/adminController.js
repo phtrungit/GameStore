@@ -1,4 +1,5 @@
 var Product=require('../models/product');
+var User=require('../models/user');
 var passport=require('passport');
 var flash=require('connect-flash');
 exports.dashboard = function (req, res, next){
@@ -14,6 +15,18 @@ exports.product_admin = function (req, res, next) {
             if (err) { return next(err); }
             // Successful, so render.
             res.render('./admin/product', { product_list: list_products,layout:"admin_layout"});
+        })
+
+};
+exports.user_admin = function (req, res, next) {
+
+    //res.render('./admin/product',{layout:"admin_layout"})
+
+    User.find()
+        .exec(function (err, list_users) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('./admin/user', { users_list: list_users,layout:"admin_layout"});
         })
 
 };
@@ -82,7 +95,41 @@ Product.findByIdAndRemove(req.params.id, function (err) {
                    res.redirect('/admin/product');
                 });
 };
+exports.user_edit_get = function (req, res, next) {
 
+    User.findById(req.params.id)
+        .exec(function (err, user) {
+            if (err) { return next(err); }
+            if(user.isActivated)
+                res.render('./admin/edit_user',{layout:"admin_layout",csrfToken:req.csrfToken(),user:user,activated_flag:'checked'});
+            else
+                res.render('./admin/edit_user',{layout:"admin_layout",csrfToken:req.csrfToken(),user:user,unactivated_flag:'checked'});
+        })
+
+
+};
+exports.user_edit_post = function (req, res, next) {
+
+    var status;
+    if(req.body.user_status=='true')
+        status=true;
+    else
+        status=false;
+    var user=new User({
+        name:req.body.user_name,
+        phone:req.body.user_phone,
+        mail:req.body.user_mail,
+        isActivated:status,
+        _id:req.params.id,
+
+    });
+    User.findByIdAndUpdate(req.params.id, user, {}, function (err,user) {
+        if (err) { return next(err); }
+        // Successful - redirect to genre detail page.
+        res.redirect('/admin/user');
+    });
+
+};
 exports.login = function (req, res, next) {
     var messages=req.flash('error');
     res.render('./admin/admin_login',{layout:false,csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
