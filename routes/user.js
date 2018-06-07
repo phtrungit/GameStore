@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
 var csrfProtection = csrf();
+var manager = require('connect-ensure-login');
 router.use(csrfProtection);
 var user_controller = require('../controllers/userController');
 router.get('/login',user_controller.notLoggedIn, user_controller.login_form);
@@ -10,5 +11,7 @@ router.get('/register',user_controller.notLoggedIn, user_controller.register_for
 router.post('/register', user_controller.register_form_post);
 router.get('/logout', user_controller.user_logout);
 router.get('/detail',user_controller.isLoggedIn, user_controller.user_info);
+router.get('/checkout',manager.ensureLoggedIn('/user/login'), user_controller.checkout);
+router.get('/buy',manager.ensureLoggedIn('/user/login'), user_controller.buy);
 
 module.exports = router;

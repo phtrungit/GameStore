@@ -1,0 +1,62 @@
+<div id="container">
+    <div class="container">
+        {{# if this.products }}
+        <div class="row">
+            <div id="content" class="col-sm-12"><h1>Chi tiết đơn hàng</h1>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <td class="text-center">Hình</td>
+                            <td class="text-left">Tên sản phẩm</td>
+
+                            <td class="text-left">Số lượng</td>
+                            <td class="text-right">Đơn giá</td>
+                            <td class="text-right">Tổng cộng</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each products}}
+                            <tr>
+                                <td class="text-center">
+                                    <img src="{{this.item.imagePath}}" alt="{{this.item.title}}" title="{{this.item.title}}" class="img-thumbnail">
+                                </td>
+                                <td class="text-left">{{this.item.title}}
+                                </td>
+                                <td class="text-left">{{this.qty}}
+                                </td>
+
+                                <td class="text-right">{{this.item.price}}</td>
+                                <td class="text-right">{{this.price}}VNĐ</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-8">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="text-right"><strong>Tổng cộng:</strong></td>
+                                <td class="text-right">{{this.totalPrice}} VNĐ</td>
+                            </tr>
+                            </tbody></table>
+                    </div>
+                </div>
+                <div class="buttons clearfix">
+
+                    <div class="pull-right"><a href="/user/buy" class="btn btn-primary">Đặt mua</a></div>
+                </div>
+            </div>
+
+        {{ else }}
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+                    <h2>No Items in Cart yet!</h2>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

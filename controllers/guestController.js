@@ -117,6 +117,18 @@ exports.addToCartQty = function (req, res, next) {
         res.redirect('/');
     });
 };
+exports.shopping_cart =function (req,res,next) {
+    if (!req.session.cart) {
+        return res.render('./shop/cart', {products: null});
+    }
+    var cart = new Cart(req.session.cart);
+    console.log('Cart info');
+    console.log(cart);
+    if(req.isAuthenticated())
+        res.render('./shop/cart', {layout:'user_layout',username:req.user.username,products: cart.generateArray(), totalPrice: cart.totalPrice,totalQty:cart.totalQty});
+    else
+        res.render('./shop/cart', {products: cart.generateArray(), totalPrice: cart.totalPrice,totalQty:cart.totalQty});
+};
 /*
 exports.product_list = function (req, res, next) {
 

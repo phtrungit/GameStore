@@ -576,3 +576,17 @@ border-top-color: #D9D9D9;
   font-size: 20px;
   font-weight: bold;
 }
+#cart
+{
+    color:#ff751a;
+}
+.img-thumbnail
+{
+    width: 128px;
+    height: 64px;
+}
+#buy_success
+{
+    font-size: 20px;
+    color:#ff751a;
+}
