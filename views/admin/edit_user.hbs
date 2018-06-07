@@ -1,0 +1,56 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Edit product</h4>
+                    {{#user}}
+                        <script>
+                            $(document).ready(function(){
+                                $("#{{this.category}}").attr({'selected':''});
+                            });
+                        </script>
+                        <form class="forms-sample" method="post" action="/admin/user/edit/{{this._id}}" />
+                        <div class="form-group">
+
+                            <label for="exampleInputName1">Name</label>
+                            <input type="text" class="form-control" id="exampleInputName1" name="user_name" value="{{this.name}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputCity1">Phone</label>
+                            <input type="text" class="form-control" id="exampleInputCity1" name="user_phone" value="{{this.phone}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputCity1">Email</label>
+                            <input type="text" class="form-control" id="exampleInputCity1" name="user_mail" value="{{this.mail}}" />
+                        </div>
+
+                    {{/user}}
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Status</label>
+                        <div class="col-sm-4">
+                            <div class="form-radio">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="user_status" id="activated" value="true" {{activated_flag}} />
+                                    Activated
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-radio">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="user_status" id="Unactivated" value="false" {{unactivated_flag}} />
+                                    Unactivated
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                    <button type="submit" class="btn btn-success mr-2">Save</button>
+                    <button id="cancle" href="#" class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
