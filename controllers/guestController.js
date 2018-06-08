@@ -72,7 +72,7 @@ exports.product_category = function (req, res, next) {
             var productChunk=[];
             var chunkSize=3;
             for (var i = 0; i <category_products.length; i+=chunkSize) {
-            	productChunk.push(category_products.slice(i,i+chunkSize));
+                productChunk.push(category_products.slice(i,i+chunkSize));
             }
             if(req.session.cart)
             {
@@ -162,7 +162,6 @@ exports.register_success = function (req,res,next) {
 
 /*
 exports.product_list = function (req, res, next) {
-
     async.parallel({
         product: function (callback) {
             Product.find()
@@ -177,6 +176,5 @@ exports.product_list = function (req, res, next) {
         // Successful, so render.
         res.render('index', { product_list: results.product, category_list: results.category});
     });
-
 };
 */

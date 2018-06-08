@@ -65,7 +65,7 @@ $(document).ready(function(){
         if (current === 1){
             $('#paging').find('.pagination').append('<li class="disabled"><a>First</a></li>');
         }else{
-            $('#paging').find('.pagination').append('<li><a href="/1">First</a></li>');
+            $('#paging').find('.pagination').append('<li><a href="/page/1">First</a></li>');
         }
         var i = current > 2 ? current - 1 : 1;
         if (i !== 1){
@@ -75,7 +75,7 @@ $(document).ready(function(){
             if (i === current){
                 $('#paging').find('.pagination').append('<li class="active"><a>'+ i +'</a></li>');
             }else{
-                $('#paging').find('.pagination').append('<li><a href="/'+ i +'">'+ i +'</a></li>');
+                $('#paging').find('.pagination').append('<li><a href="/page/'+ i +'">'+ i +'</a></li>');
             }
             if (i === current + 1 && i < pages){
                 $('#paging').find('.pagination').append('<li><a>...</a></li>');
@@ -84,7 +84,7 @@ $(document).ready(function(){
         if (current === pages) {
             $('#paging').find('.pagination').append('<li><a>Last</a></li>');
         }else{
-            $('#paging').find('.pagination').append('<li><a href="/'+ pages +'">Last</a></li>');
+            $('#paging').find('.pagination').append('<li><a href="/page/'+ pages +'">Last</a></li>');
         }
         $('#paging').append('</ul>');
     }
