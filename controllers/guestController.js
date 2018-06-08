@@ -1,6 +1,8 @@
 var Product= require('../models/product');
+var User =require('../models/user');
 var Category= require('../models/category');
 var Cart = require('../models/cart');
+var async = require('async');
 exports.product_list = function (req, res, next) {
 
     Product.find()
@@ -24,7 +26,7 @@ exports.product_list = function (req, res, next) {
                 totalQty=0;
                 totalPrice=0;
             }
-            if (req.isAuthenticated()) {
+            if (req.isAuthenticated()&& req.user.isActivated) {
                     res.render('index', { product_list: productChunk,layout:'user_layout',username:req.user.username,totalQty:totalQty,totalPrice:totalPrice});
                 }
             else
@@ -49,7 +51,7 @@ exports.product_detail = function (req, res, next) {
                 totalQty=0;
                 totalPrice=0;
             }
-            if(req.isAuthenticated())
+            if(req.isAuthenticated() && req.user.isActivated)
                 res.render('./products/product_detail', { layout:'user_layout',username:req.user.username,product_detail: detail_products,totalQty:totalQty,totalPrice:totalPrice });
             else
                 res.render('./products/product_detail', { product_detail: detail_products,totalQty:totalQty,totalPrice:totalPrice });
@@ -77,7 +79,7 @@ exports.product_category = function (req, res, next) {
                 totalQty=0;
                 totalPrice=0;
             }
-            if(req.isAuthenticated())
+            if(req.isAuthenticated() && req.user.isActivated)
                 res.render('./products/product_category', { layout:'user_layout',username:req.user.username,product_category: productChunk,category_name:req.params.category_name,totalQty:totalQty,totalPrice:totalPrice });
             else
                 res.render('./products/product_category', { product_category: productChunk,category_name:req.params.category_name,totalQty:totalQty,totalPrice:totalPrice });
@@ -124,10 +126,33 @@ exports.shopping_cart =function (req,res,next) {
     var cart = new Cart(req.session.cart);
     console.log('Cart info');
     console.log(cart);
-    if(req.isAuthenticated())
+    if(req.isAuthenticated() && req.user.isActivated)
         res.render('./shop/cart', {layout:'user_layout',username:req.user.username,products: cart.generateArray(), totalPrice: cart.totalPrice,totalQty:cart.totalQty});
     else
         res.render('./shop/cart', {products: cart.generateArray(), totalPrice: cart.totalPrice,totalQty:cart.totalQty});
+};
+
+exports.verifyUser = function (req,res,next) {
+
+    var token=req.query.id;
+
+    User.find({tokenAuth:token},function (err,user){
+        console.log(user);
+        var new_user = new User({
+            isActivated:true,
+            _id:user[0]._id
+        });
+        console.log(new_user);
+        User.findByIdAndUpdate(user[0]._id, new_user, {}, function (err,result) {
+            if (err) { return next(err); }
+            // Successful - redirect to genre detail page.
+        });
+        res.render('./users/email_verified');
+    });
+};
+
+exports.register_success = function (req,res,next) {
+    res.render('./users/register_success',{email:req.user.mail});
 };
 
 /*

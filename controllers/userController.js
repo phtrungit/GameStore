@@ -19,10 +19,29 @@ exports.register_form = function (req, res, next){
     res.render('./users/user_register',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
 };
 exports.register_form_post = passport.authenticate('local.signup', {
-    successRedirect: '/',
+    successRedirect: '/register-success',
     failureRedirect: '/user/register',
     failureFlash: true
 });
+
+/*exports.register_form_post =function(req,res,next) {
+    passport.authenticate('local.signup', {
+        failureFlash: true,
+        failureRedirect: '/user/register'
+    },function (err,user,info) {
+        if (err)
+        {
+            return next(err);
+        }
+        if(!user)
+        {
+            res.redirect('/user/register')
+        }
+        else
+            res.render('./users/register_success',{email:user.mail});
+
+    })(req, res, next);
+};*/
 exports.user_info = function (req, res, next){
     if(req.session.cart)
     {
@@ -41,16 +60,16 @@ exports.user_logout = function (req, res, next){
     res.redirect('/user/login');
 };
 exports.isLoggedIn=function (req, res, next) {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated() && req.user.isActivated) {
         return next();
     }
-    res.redirect('/');
+        res.redirect('/user/login');
 };
 exports.notLoggedIn=function (req, res, next) {
-    if (!req.isAuthenticated()) {
+    if (!req.isAuthenticated() ) {
         return next();
     }
-    res.redirect('/');
+        res.redirect('/');
 };
 
 exports.checkout = function (req,res,next) {

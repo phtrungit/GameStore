@@ -12,5 +12,8 @@ router.get('/category/:category_name',guest_controller.product_category);
 router.post('/add-to-cart/:id',guest_controller.addToCart);
 router.post('/add-to-cart/:id/:qty',guest_controller.addToCartQty);
 router.get('/shopping-cart',guest_controller.shopping_cart);
+router.get('/verify',guest_controller.verifyUser);
+router.get('/register-success',guest_controller.register_success);
+
 
 module.exports = router;

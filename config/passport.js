@@ -1,8 +1,16 @@
 var passport=require('passport');
 var User=require('../models/user');
 var LocalStrategy=require('passport-local').Strategy;
+var randtoken = require('rand-token');
 var expressValidator = require('express-validator');
-
+var nodemailer = require("nodemailer");
+var smtpTransport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: "dhtgamestore@gmail.com",
+        pass: "123456789Trung"
+    }
+});
 passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
@@ -37,9 +45,10 @@ passport.use('local.signup', new LocalStrategy({
             return done(err);
         }
         if (user) {
-            return done(null, false, {message: 'Email is already in use.'});
+            return done(null, false, {message: 'Username is already in use.'});
         }
         var newUser = new User();
+        var token = randtoken.generate(16);
         newUser.username = username;
         newUser.password = newUser.encryptPassword(password);
         newUser.name=req.body.name;
@@ -47,10 +56,30 @@ passport.use('local.signup', new LocalStrategy({
         newUser.phone=req.body.phone;
         newUser.imagePath='';
         newUser.isAdmin=false;
+        newUser.isActivated=false;
+        newUser.tokenAuth=token;
         newUser.save(function(err, result) {
            if (err) {
                return done(err);
            }
+            var link="http://"+req.get('host')+"/verify?id="+token;
+            let mailOptions={
+                from: ' "DHTGameStore" <dhtgamestore@gmail.com>',
+                to : newUser.mail,
+                subject : "Please confirm your Email account",
+                html : "Hello,"+newUser.username+"<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
+            };
+            smtpTransport.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                // Preview only available when sending through an Ethereal account
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+                // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+                // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+            });
            return done(null, newUser);
         });
     });
@@ -80,6 +109,9 @@ passport.use('local.signin', new LocalStrategy({
         }
         if (!user.validPassword(password)) {
             return done(null, false, {message: 'Wrong password.'});
+        }
+        if (!user.isActivated) {
+            return done(null, false, {message: 'Vui lòng kích hoạt tài khoản trước khi đăng nhập!'});
         }
         return done(null, user);
     });

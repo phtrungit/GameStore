@@ -72,5 +72,17 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+app.get('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err)
+        {
+            return next(err);
+        }
+        if (!user)
+        {
+            return res.redirect('/login');
+        }
 
+    })(req, res, next);
+});
 module.exports = app;

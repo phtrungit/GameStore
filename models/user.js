@@ -8,8 +8,9 @@ var schema=new Schema({
 	username:{type:String, require:true},
 	password:{type:String, require:true},
 	isAdmin: { type: Boolean},
-	phone:{type: String, default:''},
-	isActivated:{type:Boolean, default:false}
+	tokenAuth:{type:String},
+	phone:{type: String},
+	isActivated:{type:Boolean}
 });
 schema.methods.encryptPassword = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);  
