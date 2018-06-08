@@ -1,8 +1,16 @@
 var Product= require('../models/product');
 var User =require('../models/user');
 var Category= require('../models/category');
+var randtoken = require('rand-token');
 var Cart = require('../models/cart');
-
+var nodemailer = require("nodemailer");
+var smtpTransport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: "dhtgamestore@gmail.com",
+        pass: "123456789Trung"
+    }
+});
 exports.product_list = function (req, res, next) {
     var perPage = 9;
     var page = req.params.page || 1;
@@ -152,14 +160,87 @@ exports.verifyUser = function (req,res,next) {
             if (err) { return next(err); }
             // Successful - redirect to genre detail page.
         });
-        res.render('./users/email_verified');
+        res.render('./notification',{message:'Tài khoản kích hoạt thành công!'});
     });
 };
 
 exports.register_success = function (req,res,next) {
-    res.render('./users/register_success',{email:req.user.mail});
+    var email=req.user.mail;
+    res.render('./notification',{message:'Email kích hoạt tài khoản đã gửi vào hòm thư của bạn!\n' +
+        '<br>\n' + 'Vui lòng truy cập vào địa chỉ hòm thư '+email+ ' để kích hoạt tài khoản!'});
+};
+exports.req_recover_password = function (req,res,next) {
+    res.render('./users/forget_password');
+};
+exports.req_recover_password_post = function (req,res,next) {
+    var username=req.body.username;
+
+    User.find({username:username},function (err,user){
+        console.log(user);
+        if(user[0]==undefined)
+        {
+            res.render('./users/recover_password',{error:'Tài khoản không tồn tại'});
+        }else if(!user[0].isActivated)
+        {
+            res.render('./users/recover_password',{error:'Tài khoản chưa được kích hoạt'});
+        }
+        else
+        {
+            var token = randtoken.generate(30);
+            var new_user = new User({
+                tokenAuth:token,
+                _id:user[0]._id
+            });
+            User.findByIdAndUpdate(user[0]._id, new_user, {}, function (err,result) {
+                if (err) { return next(err); }
+                // Successful - redirect to genre detail page.
+            });
+
+            var link="http://"+req.get('host')+"/recover?id="+token;
+            let mailOptions={
+                from: ' "DHTGameStore" <dhtgamestore@gmail.com>',
+                to : user[0].mail,
+                subject : "Xác nhận thay đổi mật khẩu",
+                html : "Hello,"+user[0].username+"<br> Please Click on the link to change your password.<br><a href="+link+">Click here to continue</a>"
+            };
+            smtpTransport.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                // Preview only available when sending through an Ethereal account
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+                // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+                // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+            });
+            res.render('./notification',{message:'Link thay đổi mật khẩu đã gửi vào hòm thư của bạn!\n' +
+                '<br>\n' + 'Vui lòng truy cập vào địa chỉ hòm thư '+user[0].mail+ ' và làm theo hướng dẫn!'});
+        }
+    });
 };
 
+exports.recover_password = function (req,res,next) {
+
+    var token=req.query.id;
+    res.render('./users/recover_password',{token:token});
+};
+exports.recover_password_post = function (req,res,next) {
+
+    User.find({tokenAuth:req.body.token},function (err,user){
+        console.log(user);
+        var new_user = new User({
+            _id:user[0]._id
+        });
+        new_user.password=new_user.encryptPassword(req.body.new_pass);
+        console.log(new_user);
+        User.findByIdAndUpdate(user[0]._id, new_user, {}, function (err,result) {
+            if (err) { return next(err); }
+            // Successful - redirect to genre detail page.
+        });
+        res.render('./notification',{message:'Thay đổi mật khẩu thành công!'});
+    });
+};
 /*
 exports.product_list = function (req, res, next) {
     async.parallel({

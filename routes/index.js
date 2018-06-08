@@ -15,6 +15,11 @@ router.post('/add-to-cart/:id/:qty',guest_controller.addToCartQty);
 router.get('/shopping-cart',guest_controller.shopping_cart);
 router.get('/verify',guest_controller.verifyUser);
 router.get('/register-success',guest_controller.register_success);
+router.get('/forget-password',guest_controller.req_recover_password);
+router.post('/forget-password',guest_controller.req_recover_password_post);
+router.get('/recover',guest_controller.recover_password);
+router.post('/recover',guest_controller.recover_password_post);
+
 
 
 module.exports = router;
