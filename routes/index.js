@@ -7,6 +7,7 @@ var guest_controller = require('../controllers/guestController');
 
 /* GET home page. */
 router.get('/',guest_controller.product_list);
+router.get('/:page',guest_controller.product_list);
 router.get('/product/:id',guest_controller.product_detail);
 router.get('/category/:category_name',guest_controller.product_category);
 router.post('/add-to-cart/:id',guest_controller.addToCart);

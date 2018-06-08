@@ -2,35 +2,40 @@ var Product= require('../models/product');
 var User =require('../models/user');
 var Category= require('../models/category');
 var Cart = require('../models/cart');
-var async = require('async');
-exports.product_list = function (req, res, next) {
 
+exports.product_list = function (req, res, next) {
+    var perPage = 9;
+    var page = req.params.page || 1;
     Product.find()
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
         .exec(function (err, list_products) {
-            if (err) { return next(err); }
-            // Successful, so render.
-            var productChunk=[];
-            var chunkSize=3;
-            for (var i = 0; i <list_products.length; i+=chunkSize) {
-            	productChunk.push(list_products.slice(i,i+chunkSize));
-            }
-            var totalQty;
-            var totalPrice;
-            if(req.session.cart)
-            {
-                totalQty=req.session.cart.totalQty;
-                totalPrice=req.session.cart.totalPrice;
-            }
-            else
-            {
-                totalQty=0;
-                totalPrice=0;
-            }
-            if (req.isAuthenticated()&& req.user.isActivated) {
-                    res.render('index', { product_list: productChunk,layout:'user_layout',username:req.user.username,totalQty:totalQty,totalPrice:totalPrice});
+            Product.count().exec(function(err, count) {
+                if (err) { return next(err); }
+                // Successful, so render.
+                var productChunk=[];
+                var chunkSize=3;
+                for (var i = 0; i <list_products.length; i+=chunkSize) {
+                    productChunk.push(list_products.slice(i,i+chunkSize));
                 }
-            else
-            res.render('index', { product_list: productChunk,layout:'layout',totalQty:totalQty,totalPrice:totalPrice});
+                var totalQty;
+                var totalPrice;
+                if(req.session.cart)
+                {
+                    totalQty=req.session.cart.totalQty;
+                    totalPrice=req.session.cart.totalPrice;
+                }
+                else
+                {
+                    totalQty=0;
+                    totalPrice=0;
+                }
+                if (req.isAuthenticated() && req.user.isActivated) {
+                    res.render('index', { product_list: productChunk,layout:'user_layout',username:req.user.username,totalQty:totalQty,totalPrice:totalPrice,current:page,pages:Math.ceil(count / perPage)});
+                }
+                else
+                    res.render('index', { product_list: productChunk,layout:'layout',totalQty:totalQty,totalPrice:totalPrice,current:page,pages:Math.ceil(count / perPage)});
+            })
         })
 
 };

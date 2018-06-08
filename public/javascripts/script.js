@@ -56,4 +56,36 @@ $(document).ready(function(){
 		$(this).css({'display':'none'});
 	})
 
+    /* Pagination */
+    var pages = Number($('#temp-pages').text());
+    var current = Number($('#temp-current').text());
+    $('#paging').remove('#temp-pages','#temp-current');
+    if (pages > 0){
+        $('#paging').append('<ul class="pagination justify-content-end">');
+        if (current === 1){
+            $('#paging').find('.pagination').append('<li class="disabled"><a>First</a></li>');
+        }else{
+            $('#paging').find('.pagination').append('<li><a href="/1">First</a></li>');
+        }
+        var i = current > 2 ? current - 1 : 1;
+        if (i !== 1){
+            $('#paging').find('.pagination').append('<li><a>...</a></li>');
+        }
+        for (; i <= current + 1 && i <= pages; i++) {
+            if (i === current){
+                $('#paging').find('.pagination').append('<li class="active"><a>'+ i +'</a></li>');
+            }else{
+                $('#paging').find('.pagination').append('<li><a href="/'+ i +'">'+ i +'</a></li>');
+            }
+            if (i === current + 1 && i < pages){
+                $('#paging').find('.pagination').append('<li><a>...</a></li>');
+            }
+        }
+        if (current === pages) {
+            $('#paging').find('.pagination').append('<li><a>Last</a></li>');
+        }else{
+            $('#paging').find('.pagination').append('<li><a href="/'+ pages +'">Last</a></li>');
+        }
+        $('#paging').append('</ul>');
+    }
 });
