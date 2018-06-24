@@ -2,6 +2,7 @@ var User=require('../models/user');
 var passport=require('passport');
 var flash=require('connect-flash');
 var Cart = require('../models/cart');
+var Order = require('../models/order');
 
 exports.login_form = function (req, res, next){
 	var messages=req.flash('error');
@@ -80,6 +81,21 @@ exports.checkout = function (req,res,next) {
     res.render('./shop/detail_cart',{layout:'user_layout',username:req.user.username,products: cart.generateArray(), totalPrice: cart.totalPrice,totalQty:cart.totalQty});
 };
 exports.buy =function (req,res,next) {
-    req.session.cart=null;
-    res.render('./shop/buy_success',{layout:'user_layout',username:req.user.username,totalQty:0,totalPrice:0});
+    order = new Order();
+    var cart = new Cart(req.session.cart);
+    order.cart=cart.generateArray();
+    order.customer=req.user;
+    order.customer_name=req.user.name;
+    order.status='Chưa thanh toán';
+    order.deliver='Chưa giao';
+    order.TotalQty=cart.totalQty;
+    order.TotalPrice=cart.totalPrice;
+    var date =new Date();
+    order.date=date;
+    order.save(function(err, result) {
+        if (err) { return next(err); }
+        req.session.cart=null;
+        res.render('./shop/buy_success',{layout:'user_layout',username:req.user.username,totalQty:0,totalPrice:0});
+    });
+
 };

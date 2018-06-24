@@ -2,6 +2,7 @@ var Product=require('../models/product');
 var User=require('../models/user');
 var passport=require('passport');
 var flash=require('connect-flash');
+var Order=require('../models/order');
 exports.dashboard = function (req, res, next){
     res.render('./admin/dashboard',{layout:"admin_layout",username:req.user.username});
 };
@@ -128,6 +129,36 @@ exports.user_edit_post = function (req, res, next) {
         // Successful - redirect to genre detail page.
         res.redirect('/admin/user');
     });
+
+};
+exports.order_admin = function (req, res, next) {
+
+    //res.render('./admin/product',{layout:"admin_layout"})
+
+    Order.find()
+        .exec(function (err, list_order) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('./admin/order', { order_list: list_order,layout:"admin_layout"});
+        })
+
+};
+exports.order_detail_admin = function (req, res, next) {
+
+    //res.render('./admin/product',{layout:"admin_layout"})
+
+    Order.findById(req.params.id)
+        .exec(function (err, order_detail) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            User.findById(order_detail.customer)
+                .exec(function (err, user) {
+                    if (err) { return next(err); }
+                    console.log(user);
+                    res.render('./admin/detail_order', { order: order_detail,layout:"admin_layout",email:user.mail});
+                });
+
+        })
 
 };
 exports.login = function (req, res, next) {

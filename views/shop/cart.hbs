@@ -30,8 +30,8 @@
 
                               <a type="button" data-toggle="tooltip" title="" class="btn btn-danger" href="#" data-original-title="Loại bỏ"><i class="fa fa-times-circle"></i></a>
                               </span></div></td>
-                                <td class="text-right">{{this.item.price}}</td>
-                                <td class="text-right">{{this.price}}VNĐ</td>
+                                <td class="text-right">{{number this.item.price}} VNĐ</td>
+                                <td class="text-right">{{number this.price}}VNĐ</td>
                             </tr>
                         {{/each}}
                         </tbody>
@@ -43,7 +43,7 @@
                             <tbody>
                             <tr>
                                 <td class="text-right"><strong>Tổng cộng:</strong></td>
-                                <td class="text-right">{{this.totalPrice}} VNĐ</td>
+                                <td class="text-right">{{number this.totalPrice}} VNĐ</td>
                             </tr>
                             </tbody></table>
                     </div>

@@ -1,5 +1,12 @@
 <div class="content-wrapper">
 <div class="row">
+    <script>
+        function imgPrev() {
+            var url = $("#product_image").val();
+            $("#img_pre").attr({'src':url});
+        }
+    </script>
+
 	<div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -11,6 +18,10 @@
                   });
                   </script>
                   <form class="forms-sample" method="post" action="/admin/product/edit{{this.url}}" />
+                  <div class="form-group">
+                      <img src="{{this.imagePath}}" id="img_pre" class="icon-choose-image" width="256" height="128" />
+                  </div>
+
                     <div class="form-group">
                         
                       <label for="exampleInputName1">Name</label>
@@ -18,7 +29,7 @@
                     </div>
                       <div class="form-group">
                           <label for="exampleInputCity1">Image path</label>
-                          <input type="text" class="form-control" id="exampleInputCity1" name="product_image" placeholder="ex:steam.com/image.png" value="{{this.imagePath}}" />
+                          <input type="text" class="form-control" id="product_image" onfocusout="imgPrev()" name="product_image" placeholder="ex:steam.com/image.png" value="{{this.imagePath}}" />
                       </div>
                     <div class="form-group">
                       <label for="exampleInputName1">Category</label>

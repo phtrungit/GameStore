@@ -14,7 +14,9 @@ var passport=require('passport');
 var flash=require('connect-flash');
 var validator = require('express-validator');
 var MongoStore=require('connect-mongo')(session);
-
+var Handlebars = require("handlebars");
+var NumeralHelper = require("handlebars.numeral");
+NumeralHelper.registerHelpers(Handlebars);
 var app = express();
 var mongoDB = 'mongodb://admin:phtrungit@ds119080.mlab.com:19080/dhtstoredb';
 mongoose.connect(mongoDB);

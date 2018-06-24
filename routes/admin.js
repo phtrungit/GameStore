@@ -18,5 +18,6 @@ router.post('/product/edit/:id',admin_controller.isLoggedIn,admin_controller.pro
 router.get('/user/edit/:id',admin_controller.isLoggedIn,admin_controller.user_edit_get);
 router.post('/user/edit/:id',admin_controller.isLoggedIn,admin_controller.user_edit_post);
 router.get('/product/delete/:id',admin_controller.isLoggedIn,admin_controller.product_delete);
-
+router.get('/order',admin_controller.isLoggedIn, admin_controller.order_admin);
+router.get('/order_detail/:id',admin_controller.isLoggedIn, admin_controller.order_detail_admin);
 module.exports = router;

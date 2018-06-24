@@ -1,0 +1,64 @@
+<div class="content-wrapper">
+<div class="row">
+    <div id="content" class="col-sm-12">
+        {{# order}}
+            <div class="order_info">
+                <b>
+                    <h4>Mã đơn hàng: {{this._id}}</h4>
+                    <p>Tên khách hàng: {{this.customer_name}}</p>
+                    <p>Ngày đặt hàng: {{this.date_string}} {{this.hhmmss}}</p>
+                    <p>Thanh toán: <label class="badge badge-info">{{this.status}}</label></p>
+                    <p>Giao hàng: <label class="badge badge-info">{{this.deliver}}</label></p>
+                    {{/order}}
+                    <p>Địa chỉ giao hàng: {{email}}</p>
+        {{# order}}
+                </b>
+            </div>
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td class="text-center">Hình</td>
+                    <td class="text-left">Tên sản phẩm</td>
+
+                    <td class="text-left">Số lượng</td>
+                    <td class="text-right">Đơn giá</td>
+                    <td class="text-right">Tổng cộng</td>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each this.cart}}
+                    <tr>
+                        <td class="text-center">
+                            <img src="{{this.item.imagePath}}" alt="{{this.item.title}}" title="{{this.item.title}}" class="img-thumbnail">
+                        </td>
+                        <td class="text-left">{{this.item.title}}
+                        </td>
+                        <td class="text-left">{{this.qty}}
+                        </td>
+
+                        <td class="text-right currency">{{number this.item.price}} VNĐ</td>
+                        <td class="text-right currency">{{number this.price}}VNĐ</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-8">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td class="text-right"><strong>Tổng cộng:</strong></td>
+                        <td class="text-right currency">{{number this.TotalPrice}} VNĐ</td>
+                    </tr>
+                    </tbody></table>
+            </div>
+        </div>
+
+        {{/order}}
+    </div>
+    </div>
+</div>
