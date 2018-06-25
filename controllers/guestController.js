@@ -3,6 +3,7 @@ var User =require('../models/user');
 var Category= require('../models/category');
 var randtoken = require('rand-token');
 var Cart = require('../models/cart');
+var Comment = require('../models/comment');
 var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport({
     service: "Gmail",
@@ -53,7 +54,8 @@ exports.product_detail = function (req, res, next) {
     Product.findById(req.params.id)
         .exec(function (err, detail_products) {
             if (err) { return next(err); }
-            // Successful, so render.
+            Comment.find({id_product:req.params.id},function (err,comment_list){
+       
             if(req.session.cart)
             {
                 totalQty=req.session.cart.totalQty;
@@ -65,9 +67,14 @@ exports.product_detail = function (req, res, next) {
                 totalPrice=0;
             }
             if(req.isAuthenticated() && req.user.isActivated)
-                res.render('./products/product_detail', { layout:'user_layout',username:req.user.username,product_detail: detail_products,totalQty:totalQty,totalPrice:totalPrice });
+                res.render('./products/product_detail', { isActivated:true,comment:comment_list,id_product:req.params.id,layout:'user_layout',username:req.user.username,product_detail: detail_products,totalQty:totalQty,totalPrice:totalPrice });
             else
-                res.render('./products/product_detail', { product_detail: detail_products,totalQty:totalQty,totalPrice:totalPrice });
+                res.render('./products/product_detail', { isActivated:false,comment:comment_list,id_product:req.params.id,product_detail: detail_products,totalQty:totalQty,totalPrice:totalPrice });
+        });
+
+
+            // Successful, so render.
+            
         })
 
 };
@@ -239,6 +246,20 @@ exports.recover_password_post = function (req,res,next) {
             // Successful - redirect to genre detail page.
         });
         res.render('./notification',{message:'Thay đổi mật khẩu thành công!'});
+    });
+};
+exports.comment =function (req,res,next) {
+   var new_comment =new Comment();
+   new_comment.name=req.user.username;
+   new_comment.content=req.body.content;
+   new_comment.id_product=req.body.id_product;
+   var date =new Date();
+   new_comment.date=date;
+
+new_comment.save(function(err, result) {
+        if (err) { return next(err); }
+        console.log(req.body.id_product);
+        res.redirect('/product/'+req.body.id_product);
     });
 };
 /*

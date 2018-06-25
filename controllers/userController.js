@@ -3,7 +3,7 @@ var passport=require('passport');
 var flash=require('connect-flash');
 var Cart = require('../models/cart');
 var Order = require('../models/order');
-
+var Comment = require('../models/comment');
 exports.login_form = function (req, res, next){
 	var messages=req.flash('error');
     res.render('./users/user_login',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
@@ -124,4 +124,17 @@ exports.order_detail =function (req,res,next) {
                 });
 
         })
+};
+exports.comment =function (req,res,next) {
+   var new_comment =new Comment();
+   new_comment.name=req.user.username;
+   new_comment.content=req.body.content;
+   new_comment.id_product=req.body.id_product;
+   var date =new Date();
+   new_comment.date=date;
+
+new_comment.save(function(err, result) {
+        if (err) { return next(err); }
+        res.redirect('/product/'+req.body.id_product);
+    });
 };
