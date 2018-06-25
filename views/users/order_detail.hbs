@@ -1,21 +1,24 @@
-<div class="content-wrapper">
-<div class="row">
-    <div id="content" class="col-sm-12">
-        {{# order}}
-            <div class="order_info">
-                <b>
-                    <h4>Mã đơn hàng: {{this._id}}</h4>
-                    <p>Tên khách hàng: {{this.customer_name}}</p>
-                    <p>Ngày đặt hàng: {{this.date_string}} {{this.hhmmss}}</p>
-                    <p>Thanh toán: <label class="badge badge-info">{{this.status}}</label></p>
-                    <p>Giao hàng: <label class="badge badge-info">{{this.deliver}}</label></p>
-                    {{/order}}
-                    <p>Địa chỉ giao hàng: {{email}}</p>
-        {{# order}}
-                </b>
-            </div>
-
-
+<div id="container">
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Danh sách đơn hàng</h4>
+                    <div class="row">
+                        <div class="col-12">
+    {{# order}}
+    <div class="order_info">
+    <b>
+        <h4>Mã đơn hàng: {{this._id}}</h4>
+        <p>Tên khách hàng: {{this.customer_name}}</p>
+        <p>Ngày đặt hàng: {{this.date_string}} {{this.hhmmss}}</p>
+        <p>Thanh toán: <label class="badge badge-info">{{this.status}}</label></p>
+        <p>Giao hàng: <label class="badge badge-info">{{this.deliver}}</label></p>
+    {{/order}}
+    <p>Địa chỉ giao hàng: {{email}}</p>
+    {{# order}}
+    </b>
+    </div>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -58,7 +61,11 @@
             </div>
         </div>
 
-        {{/order}}
-    </div>
+    {{/order}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

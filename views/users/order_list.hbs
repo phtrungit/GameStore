@@ -1,0 +1,52 @@
+<div id="container">
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Danh sách đơn hàng</h4>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="order-listing" class="table dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Số lượng sản phẩm</th>
+                                        <th>Tổng giá trị</th>
+                                        <th>Tình trạng thanh toán</th>
+                                        <th>Tình trạng giao hàng</th>
+                                        <th>Ngày đặt hàng</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{# each order_list}}
+                                    <tr>
+                                        <td>{{this._id}}</td>
+                                        <td>{{this.TotalQty}}</td>
+                                        <td>{{number this.TotalPrice}}</td>
+
+                                        <td>
+                                            <label class="badge badge-info">{{this.status}}</label>
+                                        </td>
+
+                                        <td>
+                                            <label class="badge badge-info">{{this.deliver}}</label>
+                                        </td>
+                                        <td>{{this.date_string}}</td>
+                                        <td>
+                                            <a href="/user/order_detail/{{this._id}}" class="btn btn-success">Chi tiết</a>
+
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
