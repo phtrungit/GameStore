@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 var guest_controller = require('../controllers/guestController');
-
+var search_controller = require('../controllers/search');
 
 /* GET home page. */
 router.get('/',guest_controller.product_list);
@@ -22,5 +22,6 @@ router.post('/recover',guest_controller.recover_password_post);
 router.post('/comment/:name/:content/:id_product', guest_controller.comment);
 router.get('/fetchProduct/:id',guest_controller.fetch_product);
 router.post('/del_item_cart/:id_product', guest_controller.del_item_cart);
-
+router.get('/search',search_controller.search_results);
+router.post('/search-result',search_controller.search_results_page);
 module.exports = router;
