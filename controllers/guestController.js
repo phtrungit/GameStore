@@ -139,6 +139,26 @@ exports.addToCartQty = function (req, res, next) {
         res.redirect('/');
     });
 };
+exports.del_item_cart = function (req, res, next) {
+
+    var productId=req.params.id_product;
+
+    var cart = new Cart(req.session.cart);
+    var new_cart = new Cart({});
+    var arr=cart.generateArray();
+    for (var item in arr)
+    {
+        if(arr[item].item._id!=productId)
+        {
+            console.log(arr[item].item._id+"---"+productId)
+            new_cart.add(arr[item].item,arr[item].item._id)
+        }
+
+    }
+        req.session.cart = new_cart;
+        res.redirect('/shopping-cart');
+
+};
 exports.shopping_cart =function (req,res,next) {
     if (!req.session.cart) {
         return res.render('./shop/cart', {products: null});
@@ -158,8 +178,10 @@ exports.verifyUser = function (req,res,next) {
 
     User.find({tokenAuth:token},function (err,user){
         console.log(user);
+        var token = randtoken.generate(30);
         var new_user = new User({
             isActivated:true,
+            tokenAuth:token,
             _id:user[0]._id
         });
         console.log(new_user);
@@ -239,6 +261,8 @@ exports.recover_password_post = function (req,res,next) {
         var new_user = new User({
             _id:user[0]._id
         });
+        var token = randtoken.generate(30);
+        new_user.tokenAuth=token;
         new_user.password=new_user.encryptPassword(req.body.new_pass);
         console.log(new_user);
         User.findByIdAndUpdate(user[0]._id, new_user, {}, function (err,result) {

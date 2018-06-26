@@ -3,6 +3,7 @@ var User=require('../models/user');
 var passport=require('passport');
 var flash=require('connect-flash');
 var Order=require('../models/order');
+var expressValidator = require('express-validator');
 exports.dashboard = function (req, res, next){
     res.render('./admin/dashboard',{layout:"admin_layout",username:req.user.username});
 };
@@ -15,7 +16,7 @@ exports.product_admin = function (req, res, next) {
         .exec(function (err, list_products) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('./admin/product', { product_list: list_products,layout:"admin_layout"});
+            res.render('./admin/product', { product_list: list_products,layout:"admin_layout",username:req.user.username});
         })
 
 };
@@ -27,13 +28,13 @@ exports.user_admin = function (req, res, next) {
         .exec(function (err, list_users) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('./admin/user', { users_list: list_users,layout:"admin_layout"});
+            res.render('./admin/user', { users_list: list_users,layout:"admin_layout",username:req.user.username});
         })
 
 };
 exports.add_product = function (req, res, next) {
 
-	res.render('./admin/add_product',{layout:"admin_layout",csrfToken:req.csrfToken()})
+	res.render('./admin/add_product',{layout:"admin_layout",csrfToken:req.csrfToken(),username:req.user.username})
 };
 
 exports.add_product_post = function (req, res, next) {
@@ -61,9 +62,9 @@ Product.findById(req.params.id)
         .exec(function (err, detail_products) {
             if (err) { return next(err); }
             if(detail_products.status="available")
-                res.render('./admin/edit_product',{layout:"admin_layout",csrfToken:req.csrfToken(),product:detail_products,available_flag:'checked'});
+                res.render('./admin/edit_product',{layout:"admin_layout",csrfToken:req.csrfToken(),product:detail_products,available_flag:'checked',username:req.user.username});
             else
-                res.render('./admin/edit_product',{layout:"admin_layout",csrfToken:req.csrfToken(),product:detail_products,unavailable_flag:'checked'});
+                res.render('./admin/edit_product',{layout:"admin_layout",csrfToken:req.csrfToken(),product:detail_products,unavailable_flag:'checked',username:req.user.username});
         })
    
 
@@ -102,33 +103,60 @@ exports.user_edit_get = function (req, res, next) {
         .exec(function (err, user) {
             if (err) { return next(err); }
             if(user.isActivated)
-                res.render('./admin/edit_user',{layout:"admin_layout",csrfToken:req.csrfToken(),user:user,activated_flag:'checked'});
+                res.render('./admin/edit_user',{layout:"admin_layout",csrfToken:req.csrfToken(),user:user,activated_flag:'checked',username:req.user.username});
             else
-                res.render('./admin/edit_user',{layout:"admin_layout",csrfToken:req.csrfToken(),user:user,unactivated_flag:'checked'});
+                res.render('./admin/edit_user',{layout:"admin_layout",csrfToken:req.csrfToken(),user:user,unactivated_flag:'checked',username:req.user.username});
         })
 
 
 };
 exports.user_edit_post = function (req, res, next) {
 
-    var status;
-    if(req.body.user_status=='true')
-        status=true;
-    else
-        status=false;
-    var user=new User({
-        name:req.body.user_name,
-        phone:req.body.user_phone,
-        mail:req.body.user_mail,
-        isActivated:status,
-        _id:req.params.id,
+    req.checkBody('user_name', 'Invalid name').notEmpty();
+    req.checkBody('user_phone', 'Invalid phone').notEmpty();
+    req.checkBody('user_mail', 'Invalid email').notEmpty().isEmail();
 
-    });
-    User.findByIdAndUpdate(req.params.id, user, {}, function (err,user) {
-        if (err) { return next(err); }
-        // Successful - redirect to genre detail page.
-        res.redirect('/admin/user');
-    });
+    var errors = req.validationErrors();
+    if (errors) {
+        var messages = [];
+        errors.forEach(function(error) {
+            messages.push(error.msg);
+        });
+        User.findById(req.params.id)
+            .exec(function (err, user) {
+                if (err) { return next(err); }
+                if(user.isActivated)
+                    res.render('./admin/edit_user',{layout:"admin_layout",csrfToken:req.csrfToken(),user:user,activated_flag:'checked',hasErrors:messages.length>0,messages:messages});
+                else
+                    res.render('./admin/edit_user',{layout:"admin_layout",csrfToken:req.csrfToken(),user:user,unactivated_flag:'checked',hasErrors:messages.length>0,messages:messages});
+            })
+
+
+        }
+    else
+    {
+        var status;
+        if(req.body.user_status=='true')
+            status=true;
+        else
+            status=false;
+        var user=new User({
+            name:req.body.user_name,
+            phone:req.body.user_phone,
+            mail:req.body.user_mail,
+            adminLv:req.body.admin_level,
+            isActivated:status,
+            _id:req.params.id,
+
+        });
+        User.findByIdAndUpdate(req.params.id, user, {}, function (err,user) {
+            if (err) { return next(err); }
+            // Successful - redirect to genre detail page.
+            res.redirect('/admin/user');
+        });
+    }
+
+
 
 };
 exports.order_admin = function (req, res, next) {
@@ -139,7 +167,7 @@ exports.order_admin = function (req, res, next) {
         .exec(function (err, list_order) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('./admin/order', { order_list: list_order,layout:"admin_layout"});
+            res.render('./admin/order', { order_list: list_order,layout:"admin_layout",username:req.user.username});
         })
 
 };
@@ -155,7 +183,7 @@ exports.order_detail_admin = function (req, res, next) {
                 .exec(function (err, user) {
                     if (err) { return next(err); }
                     console.log(user);
-                    res.render('./admin/detail_order', { order: order_detail,layout:"admin_layout",email:user.mail});
+                    res.render('./admin/detail_order', { order: order_detail,layout:"admin_layout",email:user.mail,username:req.user.username});
                 });
 
         })
@@ -169,13 +197,27 @@ exports.login_form_post = passport.authenticate('local.signin_admin', {
     successRedirect: '/admin',
     failureRedirect: '/admin/login',
     failureFlash: true
-})
+});
 exports.logout = function (req, res, next){
     req.logout();
     res.redirect('/admin/login');
 };
-exports.isLoggedIn=function (req, res, next) {
-    if (req.isAuthenticated() && req.user.isAdmin) {
+exports.isLoggedInLv1=function (req, res, next) {
+    if (req.isAuthenticated() && req.user.adminLv>0) {
+        return next();
+    }
+    else
+        res.redirect('/admin/login');
+};
+exports.isLoggedInLv2=function (req, res, next) {
+    if (req.isAuthenticated() && req.user.adminLv>1) {
+        return next();
+    }
+    else
+        res.redirect('/admin/login');
+};
+exports.isLoggedInLv3=function (req, res, next) {
+    if (req.isAuthenticated() && req.user.adminLv>2) {
         return next();
     }
     else

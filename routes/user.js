@@ -15,4 +15,5 @@ router.get('/checkout',manager.ensureLoggedIn('/user/login'), user_controller.ch
 router.get('/buy',manager.ensureLoggedIn('/user/login'), user_controller.buy);
 router.get('/order_list',manager.ensureLoggedIn('/user/login'), user_controller.order_list);
 router.get('/order_detail/:id',manager.ensureLoggedIn('/user/login'), user_controller.order_detail);
+router.post('/change_info', user_controller.change_info);
 module.exports = router;

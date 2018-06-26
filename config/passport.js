@@ -142,7 +142,7 @@ passport.use('local.signin_admin', new LocalStrategy({
         if (!user.validPassword(password)) {
             return done(null, false, {message: 'Wrong password.'});
         }
-        if (!user.isAdmin) {
+        if (!user.adminLv>0) {
             return done(null, false, {message: 'Your user account does not have permission to access'});
         }
         return done(null, user);

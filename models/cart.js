@@ -21,11 +21,13 @@ module.exports = function Cart(initItems) {
         this.totalQty++;
         this.totalPrice += storedItem.item.price;
     };
-
+    this.del = function (id) {
+        this.items[id] = null;
+    };
     this.generateArray = function () {
         var arr = [];
         for (var id in this.items) {
-            arr.push(this.items[id]);
+                arr.push(this.items[id]);
         }
         return arr;
     };

@@ -7,7 +7,7 @@ var schema=new Schema({
 	mail:{type:String, require:true},
 	username:{type:String, require:true},
 	password:{type:String, require:true},
-	isAdmin: { type: Boolean},
+	adminLv:{type:Number, require:true},
 	tokenAuth:{type:String},
 	phone:{type: String},
 	isActivated:{type:Boolean}

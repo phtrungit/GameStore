@@ -23,13 +23,16 @@
                                 </td>
                                 <td class="text-left">{{this.item.title}}
                                 </td>
-
+                                <form action="/del_item_cart/{{this.item._id}}" method="post">
                                 <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
                                     <input type="text" name="quantity" value="{{this.qty}}" size="1" class="form-control">
                                     <span class="input-group-btn">
 
-                              <a type="button" data-toggle="tooltip" title="" class="btn btn-danger" href="#" data-original-title="Loại bỏ"><i class="fa fa-times-circle"></i></a>
+
+
+                              <button type="submit" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Loại bỏ"><i class="fa fa-times-circle"></i></button>
                               </span></div></td>
+                                </form>
                                 <td class="text-right">{{number this.item.price}} VNĐ</td>
                                 <td class="text-right">{{number this.price}}VNĐ</td>
                             </tr>

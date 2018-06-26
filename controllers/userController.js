@@ -54,7 +54,7 @@ exports.user_info = function (req, res, next){
         totalQty=0;
         totalPrice=0;
     }
-    res.render('./users/user_info',{layout:'user_layout',name:req.user.name,username:req.user.username,email:req.user.mail,phone:req.user.phone,totalPrice:totalPrice,totalQty:totalQty});
+    res.render('./users/user_info',{csrfToken:req.csrfToken(),layout:'user_layout',name:req.user.name,username:req.user.username,email:req.user.mail,phone:req.user.phone,totalPrice:totalPrice,totalQty:totalQty});
 };
 exports.user_logout = function (req, res, next){
     req.logout();
@@ -124,4 +124,18 @@ exports.order_detail =function (req,res,next) {
                 });
 
         })
+};
+exports.change_info =function (req,res,next) {
+    var user=new User({
+        name:req.body.name,
+        phone:req.body.phone,
+        mail:req.body.email,
+        _id:req.user._id,
+
+    });
+    User.findByIdAndUpdate(req.user._id, user, {}, function (err,user) {
+        if (err) { return next(err); }
+        // Successful - redirect to genre detail page.
+        res.redirect('/user/detail');
+    });
 };

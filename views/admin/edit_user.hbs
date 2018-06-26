@@ -4,10 +4,19 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Edit product</h4>
+                    <div class="error">
+                        {{#if hasErrors}}
+
+                            {{# each messages }}
+                                <p>{{this}}!</p>
+                            {{/each}}
+
+                        {{/if}}
+                    </div>
                     {{#user}}
                         <script>
                             $(document).ready(function(){
-                                $("#{{this.category}}").attr({'selected':''});
+                                $("#{{this.adminLv}}").attr({'checked':''});
                             });
                         </script>
                         <form class="forms-sample" method="post" action="/admin/user/edit/{{this._id}}" />
@@ -41,6 +50,41 @@
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" name="user_status" id="Unactivated" value="false" {{unactivated_flag}} />
                                     Unactivated
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Admin level</label>
+                        <div class="col-sm-2">
+                            <div class="form-radio">
+                                <label class="form-check-label badge badge-primary">
+                                    <input type="radio" class="form-check-input" name="admin_level" id="0" value="0"/>
+                                    Level 0
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-radio">
+                                <label class="form-check-label badge badge-primary">
+                                    <input type="radio" class="form-check-input" name="admin_level" id="1" value="1"/>
+                                    Level 1
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-radio">
+                                <label class="form-check-label badge badge-primary">
+                                    <input type="radio" class="form-check-input" name="admin_level" id="2" value="2"/>
+                                    Level 2
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-radio">
+                                <label class="form-check-label badge badge-primary">
+                                    <input type="radio" class="form-check-input" name="admin_level" id="3" value="3"/>
+                                    Level 3
                                 </label>
                             </div>
                         </div>
