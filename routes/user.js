@@ -13,5 +13,6 @@ router.get('/logout', user_controller.user_logout);
 router.get('/detail',user_controller.isLoggedIn, user_controller.user_info);
 router.get('/checkout',manager.ensureLoggedIn('/user/login'), user_controller.checkout);
 router.get('/buy',manager.ensureLoggedIn('/user/login'), user_controller.buy);
-
+router.get('/order_list',manager.ensureLoggedIn('/user/login'), user_controller.order_list);
+router.get('/order_detail/:id',manager.ensureLoggedIn('/user/login'), user_controller.order_detail);
 module.exports = router;

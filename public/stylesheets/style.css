@@ -597,3 +597,19 @@ border-top-color: #D9D9D9;
     max-width: 200px;
     margin-bottom: 20px;
 }
+.com-mess{height:80px;width:350px;}
+.com-name:{height:20px;width:350px;}
+ul{list-style-type:none};
+li div{float:left:margin-left: 3px;}
+li{padding-top:5px;}
+li ul li{margin-left: 52px;padding-top: 5px;}
+.rep-mess{height:50px;width:300px;}
+.rep-name:{height:18px;width:300px;}
+.old-comment
+{
+  margin-bottom: 30px;
+}
+.new-comment
+{
+  margin-bottom: 30px;
+}

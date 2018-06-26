@@ -3,7 +3,7 @@ var passport=require('passport');
 var flash=require('connect-flash');
 var Cart = require('../models/cart');
 var Order = require('../models/order');
-
+var Comment = require('../models/comment');
 exports.login_form = function (req, res, next){
 	var messages=req.flash('error');
     res.render('./users/user_login',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
@@ -98,4 +98,30 @@ exports.buy =function (req,res,next) {
         res.render('./shop/buy_success',{layout:'user_layout',username:req.user.username,totalQty:0,totalPrice:0});
     });
 
+};
+exports.order_list =function (req,res,next) {
+    Order.find({customer:req.user._id})
+        .exec(function (err, list_order) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            console.log(list_order);
+            res.render('./users/order_list',{order_list:list_order,layout:'user_layout',username:req.user.username,totalQty:0,totalPrice:0});
+        })
+
+
+
+};
+exports.order_detail =function (req,res,next) {
+    Order.findById(req.params.id)
+        .exec(function (err, order_detail) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            User.findById(order_detail.customer)
+                .exec(function (err, user) {
+                    if (err) { return next(err); }
+                    console.log(user);
+                    res.render('./users/order_detail', { order: order_detail,layout:"user_layout",email:user.mail,username:req.user.username,totalQty:0,totalPrice:0});
+                });
+
+        })
 };

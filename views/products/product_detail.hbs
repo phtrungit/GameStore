@@ -110,5 +110,50 @@
                     </div>
                 </div>
             {{/product_detail}}
+            {{#if isActivated}}
+        <fieldset class="col-sm-9 new-comment" style="margin-left:280px">
+            <legend>Your Conment</legend>
+            <form class="addComment">
+                <input type="hidden" name="id_product" value="{{id_product}}">
+                <p>Nội dung</p>
+                <textarea name="content" class="com-mess"></textarea>
+                </br>
+                <input type="hidden" name="name" value="{{username}}">
+                <button type="submit" class="btn btn-success">Bình luận</button>
+            </form>
+        </fieldset >
+                {{else}}
+                <fieldset class="col-sm-9 new-comment" style="margin-left:280px">
+                    <legend>Your Conment</legend>
+                    <form class="addComment">
+                                <input type="hidden" name="id_product" value="{{id_product}}">
+                                <p>Nội dung</p>
+                                <textarea name="content" class="com-mess"></textarea>
+                                </br>
+                                <p>Tên</p>
+                                <input type="text" name="name">
+                               <button type="submit" class="btn btn-success">Bình luận</button>
+                    </form>
+                </fieldset >
+        {{/if}}
+        <fieldset class="col-sm-9 old-comment" style="margin-left:280px" >
+
+            <legend>Old conment</legend>
+            <div id="oldComment">
+            <ul class="list-comment">
+            {{# each comment}}
+                <li class="col-sm-12">
+                    <div class="col-sm-1">
+                    <img src="/images/avartar.png" class="img-fluid" alt="Responsive image"  >
+                    </div>
+                    <div><b>{{this.name}}</b><small> {{this.date_string}}<a href="#"></a></small>
+                    </div>
+                    <b>{{this.content}}</b>
+                    
+                </li>
+                {{/each}}
+            </ul>
+            </div>
+        </fieldset >
         </div>
     </div>
