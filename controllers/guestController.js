@@ -250,16 +250,22 @@ exports.recover_password_post = function (req,res,next) {
 };
 exports.comment =function (req,res,next) {
    var new_comment =new Comment();
-   new_comment.name=req.user.username;
-   new_comment.content=req.body.content;
-   new_comment.id_product=req.body.id_product;
+   new_comment.name=req.params.name;
+   new_comment.content=req.params.content;
+   new_comment.id_product=req.params.id_product;
    var date =new Date();
    new_comment.date=date;
 
 new_comment.save(function(err, result) {
         if (err) { return next(err); }
-        console.log(req.body.id_product);
-        res.redirect('/product/'+req.body.id_product);
+        console.log(req.params.id_product);
+        res.redirect('/product/'+req.params.id_product);
+    });
+};
+exports.fetch_product =function (req,res,next) {
+    Comment.find({id_product:req.params.id},function (err,user){
+
+        res.send(user);
     });
 };
 /*

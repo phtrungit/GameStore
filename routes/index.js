@@ -19,8 +19,8 @@ router.get('/forget-password',guest_controller.req_recover_password);
 router.post('/forget-password',guest_controller.req_recover_password_post);
 router.get('/recover',guest_controller.recover_password);
 router.post('/recover',guest_controller.recover_password_post);
-router.post('/comment', guest_controller.comment);
-
+router.post('/comment/:name/:content/:id_product', guest_controller.comment);
+router.get('/fetchProduct/:id',guest_controller.fetch_product);
 
 
 module.exports = router;

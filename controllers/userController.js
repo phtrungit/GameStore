@@ -125,16 +125,3 @@ exports.order_detail =function (req,res,next) {
 
         })
 };
-exports.comment =function (req,res,next) {
-   var new_comment =new Comment();
-   new_comment.name=req.user.username;
-   new_comment.content=req.body.content;
-   new_comment.id_product=req.body.id_product;
-   var date =new Date();
-   new_comment.date=date;
-
-new_comment.save(function(err, result) {
-        if (err) { return next(err); }
-        res.redirect('/product/'+req.body.id_product);
-    });
-};

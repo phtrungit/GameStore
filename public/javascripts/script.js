@@ -27,6 +27,39 @@ $(document).ready(function(){
             url: '/add-to-cart/'+productID+'/'+qty
         });
     });
+    $(".addComment").submit(function(event) {
+        /* stop form from submitting normally */
+        event.preventDefault();
+        //console.log(temp);
+        var name=$(this).find('input[name="name"]').val();
+        var content=$(this).find('textarea[name="content"]').val();
+        var id_product=$(this).find('input[name="id_product"]').val();
+        $.ajax({
+            type: "post",
+            url: '/comment/'+name+'/'+content+'/'+id_product
+        });
+        ajaxGet(id_product);
+    });
+    function ajaxGet(id_product){
+        $.ajax({
+            type : "GET",
+            url : "/fetchProduct/"+id_product,
+            success: function(result){
+                console.log(result);
+                $('#oldComment ul').empty();
+
+                $.each(result, function(i, comment){
+                    var date_string=new Date(comment.date).toUTCString();
+                    $('#oldComment .list-comment').append("<li class=\"col-sm-12\"><div class=\"col-sm-1\"><img src=\"/images/avartar.png\" class=\"img-fluid\" alt=\"Responsive image\"></div><div><b>"+comment.name+"</b><small>"+date_string+"<a href=\"#\"></a></small></div><b>"+comment.content+"</b></li>")
+                });
+                console.log("Success: ", result);
+            },
+            error : function(e) {
+                $("#getResultDiv").html("<strong>Error</strong>");
+                console.log("ERROR: ", e);
+            }
+        });
+    }
 	/* ---- Animations ---- */
 
     $('#links a').hover(
