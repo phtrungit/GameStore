@@ -11,6 +11,7 @@ var smtpTransport = nodemailer.createTransport({
         pass: "123456789Trung"
     }
 });
+
 exports.product_list = function (req, res, next) {
     var perPage = 9;
     var page = req.params.page || 1;

@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 var guest_controller = require('../controllers/guestController');
-
+var search_controller = require('../controllers/search');
 
 /* GET home page. */
 router.get('/',guest_controller.product_list);
@@ -20,6 +20,7 @@ router.post('/forget-password',guest_controller.req_recover_password_post);
 router.get('/recover',guest_controller.recover_password);
 router.post('/recover',guest_controller.recover_password_post);
 
-
+router.get('/search',search_controller.search_results);
+router.post('/search-result',search_controller.search_results_page);
 
 module.exports = router;
