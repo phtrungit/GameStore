@@ -613,3 +613,18 @@ li ul li{margin-left: 52px;padding-top: 5px;}
 {
   margin-bottom: 30px;
 }
+
+/* SEARCH BAR DROPDOWN */
+#search-dropdown{
+    position:absolute;
+    width:300px;
+    float:right;
+    top:220px;
+    right:12%;
+    z-index:10;
+    background-color:honeydew;
+    visibility: hidden;
+}
+#search-result{
+    visibility: hidden;
+}

@@ -122,33 +122,11 @@ $(document).ready(function(){
         }
         $('#paging').append('</ul>');
     }
-/*    var value = $('#search-input').val();
-    if(value == "" || value.length <= 0){
-        $('#search-result').fadeOut();
-        return;
-    }else{
-        $('#search-result').fadeIn();
-    }
-*/
-    /*$('.form-inline').submit(function(event){
-        event.preventDefault();
-        $('#search-result').empty();
-        var value = $(this).find('input[type="search"]').val();
-        
-        if(value === "" || value.length <= 0){
-            return;
-        }else{
-            $.ajax({
-                type : 'get',
-                url : '/search-result?q=' + value
-            }).fail(function(err){
-                console.log(err);
-            });
-        }
-    });
-    */
+
     $('#search-input').keyup(function(){
         $('#search-result').empty();
+        $('#search-dropdown').css({'visibility':'visible'});
+        $('#search-result').css({'visibility':'visible'});
         var value = $(this).val();
         
         if(value === "" || value.length <= 0){
