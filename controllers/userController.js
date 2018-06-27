@@ -139,3 +139,52 @@ exports.change_info =function (req,res,next) {
         res.redirect('/user/detail');
     });
 };
+exports.change_password =function (req,res,next) {
+
+    if(req.session.cart)
+    {
+        totalQty=req.session.cart.totalQty;
+        totalPrice=req.session.cart.totalPrice;
+    }
+    else
+    {
+        totalQty=0;
+        totalPrice=0;
+    }
+    res.render('./users/change_password',{csrfToken:req.csrfToken(),layout:'user_layout',username:req.user.username,totalPrice:totalPrice,totalQty:totalQty});
+
+
+};
+exports.change_password_post =function (req,res,next) {
+    var old_pass=req.body.old_pass;
+    var new_pass=req.body.new_pass;
+    if(req.session.cart)
+    {
+        totalQty=req.session.cart.totalQty;
+        totalPrice=req.session.cart.totalPrice;
+    }
+    else
+    {
+        totalQty=0;
+        totalPrice=0;
+    }
+    User.findById(req.user._id)
+        .exec(function (err, user) {
+            if (err) { return next(err); }
+            if(!user.validPassword(old_pass))
+            {
+                res.render('./users/change_password',{hasErrors:true,csrfToken:req.csrfToken(),layout:'user_layout',username:req.user.username,totalPrice:totalPrice,totalQty:totalQty});
+            }else
+            {
+                var new_user = new User({
+                    _id:user._id
+                });
+                new_user.password=new_user.encryptPassword(new_pass);
+                User.findByIdAndUpdate(user._id, new_user, {}, function (err,result) {
+                    if (err) { return next(err); }
+                    res.render('./users/change_password',{success:true,hasErrors:false,csrfToken:req.csrfToken(),layout:'user_layout',username:req.user.username,totalPrice:totalPrice,totalQty:totalQty});
+                });
+
+                }
+           });
+};
