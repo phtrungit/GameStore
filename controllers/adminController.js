@@ -215,11 +215,17 @@ exports.order_edit_post = function (req, res, next) {
         _id:req.params.id
 
     });
-    Order.findByIdAndUpdate(req.params.id, order, {}, function (err,theproduct) {
-        if (err) { return next(err); }
-        // Successful - redirect to genre detail page.
-        res.redirect('/admin/order');
-    });
+    Order.findById(req.params.id)
+        .exec(function (err, order_detail) {
+            if (err) { return next(err); }
+           order.cart=order_detail.cart;
+            Order.findByIdAndUpdate(req.params.id, order, {}, function (err,theproduct) {
+                if (err) { return next(err); }
+                // Successful - redirect to genre detail page.
+                res.redirect('/admin/order');
+            });
+        });
+
 
 };
 exports.login = function (req, res, next) {
