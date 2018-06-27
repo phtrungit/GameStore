@@ -1,0 +1,89 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Chỉnh sửa đơn hàng</h4>
+                    <div class="error">
+                        {{#if hasErrors}}
+
+                            {{# each messages }}
+                                <p>{{this}}!</p>
+                            {{/each}}
+
+                        {{/if}}
+                    </div>
+                    {{#order}}
+                        <script>
+                            $(document).ready(function(){
+                                if(this.status=="Đã thanh toán")
+                                {
+                                    $("#daThanhToan").attr({'checked':''});
+                                }
+                                else
+                                {
+                                    $("#chuaThanhToan").attr({'checked':''});
+                                }
+
+                                if(this.deliver=="Đã giao")
+                                {
+                                    $("#daGiao").attr({'checked':''});
+                                }
+                                else
+                                {
+                                    $("#chuaGiao").attr({'checked':''});
+                                }
+                            });
+                        </script>
+                        <h4 class="card-title">Mã đơn hàng {{this._id}}</h4>
+                        <form class="forms-sample" method="post" action="/admin/order_edit/{{this._id}}" />
+                    {{/order}}
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tình trạng thanh toán</label>
+                        <div class="col-sm-4">
+                            <div class="form-radio">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="order_status" id="daThanhToan" value="Đã thanh toán" />
+                                    Đã thanh toán
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-radio">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="order_status" id="chuaThanhToan" value="Chưa thanh toán"/>
+                                    Chưa thanh toán
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tình trạng giao hàng</label>
+                        <div class="col-sm-4">
+                            <div class="form-radio">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="order_deliver" id="daGiao" value="Đã giao" />
+                                    Đã giao
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-radio">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="order_deliver" id="chuaGiao" value="Chưa giao" />
+                                    Chưa giao
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                    <button type="submit" class="btn btn-success mr-2">Save</button>
+                    <button id="cancle" href="#" class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

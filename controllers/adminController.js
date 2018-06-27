@@ -189,6 +189,39 @@ exports.order_detail_admin = function (req, res, next) {
         })
 
 };
+exports.order_delete= function(req,res,next){
+    Order.findByIdAndRemove(req.params.id, function (err) {
+        if (err) { return next(err); }
+        // Successful - redirect to genre detail page.
+        res.redirect('/admin/order');
+    });
+};
+exports.order_edit_get = function (req, res, next) {
+
+    Order.findById(req.params.id)
+        .exec(function (err, order_detail) {
+            if (err) { return next(err); }
+            res.render('./admin/edit_order', { csrfToken:req.csrfToken(),order: order_detail,layout:"admin_layout",username:req.user.username});
+
+        })
+
+
+};
+exports.order_edit_post = function (req, res, next) {
+
+    var order=new Order({
+        status:req.body.order_status,
+        deliver:req.body.deliver,
+        _id:req.params.id
+
+    });
+    Order.findByIdAndUpdate(req.params.id, order, {}, function (err,theproduct) {
+        if (err) { return next(err); }
+        // Successful - redirect to genre detail page.
+        res.redirect('/admin/order');
+    });
+
+};
 exports.login = function (req, res, next) {
     var messages=req.flash('error');
     res.render('./admin/admin_login',{layout:false,csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});

@@ -20,4 +20,7 @@ router.post('/user/edit/:id',admin_controller.isLoggedInLv3,admin_controller.use
 router.get('/product/delete/:id',admin_controller.isLoggedInLv2,admin_controller.product_delete);
 router.get('/order',admin_controller.isLoggedInLv1, admin_controller.order_admin);
 router.get('/order_detail/:id',admin_controller.isLoggedInLv2, admin_controller.order_detail_admin);
+router.get('/order_delete/:id',admin_controller.isLoggedInLv2,admin_controller.order_delete);
+router.get('/order_edit/:id',admin_controller.isLoggedInLv2,admin_controller.order_edit_get);
+router.post('/order_edit/:id',admin_controller.isLoggedInLv2,admin_controller.order_edit_post);
 module.exports = router;
