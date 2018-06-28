@@ -55,7 +55,7 @@ passport.use('local.signup', new LocalStrategy({
         newUser.mail=req.body.email;
         newUser.phone=req.body.phone;
         newUser.imagePath='';
-        newUser.isAdmin=false;
+        newUser.adminLv=0;
         newUser.isActivated=false;
         newUser.tokenAuth=token;
         newUser.save(function(err, result) {
