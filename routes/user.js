@@ -15,7 +15,7 @@ router.get('/checkout',manager.ensureLoggedIn('/user/login'), user_controller.ch
 router.get('/buy',manager.ensureLoggedIn('/user/login'), user_controller.buy);
 router.get('/order_list',manager.ensureLoggedIn('/user/login'), user_controller.order_list);
 router.get('/order_detail/:id',manager.ensureLoggedIn('/user/login'), user_controller.order_detail);
-router.post('/change_info', user_controller.change_info);
-router.get('/change_password', user_controller.change_password);
-router.post('/change_password', user_controller.change_password_post);
+router.post('/change_info',manager.ensureLoggedIn('/user/login'), user_controller.change_info);
+router.get('/change_password',manager.ensureLoggedIn('/user/login'), user_controller.change_password);
+router.post('/change_password',manager.ensureLoggedIn('/user/login'), user_controller.change_password_post);
 module.exports = router;
